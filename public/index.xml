@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Data Science Every Day</title>
+        <link>https://MarkWentink.github.io/DSED/</link>
+        <description>Keep the data flowing</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</lastBuildDate>
+            <atom:link href="https://MarkWentink.github.io/DSED/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>First_post</title>
+    <link>https://MarkWentink.github.io/DSED/posts/first_post/</link>
+    <pubDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</pubDate>
+    <author>Mark Wentink</author>
+    <guid>https://MarkWentink.github.io/DSED/posts/first_post/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

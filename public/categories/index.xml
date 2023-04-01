@@ -1,0 +1,7 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Category - Data Science Every Day</title>
+        <link>https://MarkWentink.github.io/DSED/categories/</link>
+        <description>Categories - Category - Data Science Every Day</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://MarkWentink.github.io/DSED/categories/" rel="self" type="application/rss+xml" /></channel>
+</rss>

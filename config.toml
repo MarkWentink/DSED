@@ -97,9 +97,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # URL of the LOGO
       logo = ""
       # title name
-      name = ""
+      name = "DSED"
       # you can add extra information before the name (HTML format is supported), such as icons
-      pre = ""
+      pre = "<i class='fa-solid fa-power-off fa-fw'></i>"
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
       # LoveIt NEW | 0.2.5 whether to use typeit animation for title name
@@ -117,7 +117,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # LoveIt NEW | 0.2.0 whether to show the author
     author = true
     # Site creation time
-    since = 2019
+    since = 2023
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
@@ -144,7 +144,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # LoveIt NEW | 0.2.0 App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "My cool site"
+    title = "Data Science Every Day"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
@@ -193,7 +193,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page (HTML format is supported)
-      subtitle = "This is My New Hugo Site"
+      subtitle = "Let the data do the work"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links

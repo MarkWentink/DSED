@@ -6,6 +6,15 @@
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</lastBuildDate>
             <atom:link href="https://MarkWentink.github.io/DSED/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Shortest path-finding with Dijkstra&#39;s algorithm</title>
+    <link>https://MarkWentink.github.io/DSED/posts/dijkstra/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
+    <author>MW</author>
+    <guid>https://MarkWentink.github.io/DSED/posts/dijkstra/</guid>
+    <description><![CDATA[<p>In my previous post, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
+<p>Let&rsquo;s have a look here at what an implementation of that could look like.</p>]]></description>
+</item>
+<item>
     <title>First_post</title>
     <link>https://MarkWentink.github.io/DSED/posts/first_post/</link>
     <pubDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</pubDate>

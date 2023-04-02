@@ -3,5 +3,21 @@
         <title>Tags - Tag - Data Science Every Day</title>
         <link>https://MarkWentink.github.io/DSED/tags/</link>
         <description>Tags - Tag - Data Science Every Day</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://MarkWentink.github.io/DSED/tags/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="https://MarkWentink.github.io/DSED/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Algorithms</title>
+    <link>https://MarkWentink.github.io/DSED/tags/algorithms/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
+    <author>Mark Wentink</author>
+    <guid>https://MarkWentink.github.io/DSED/tags/algorithms/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Python</title>
+    <link>https://MarkWentink.github.io/DSED/tags/python/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
+    <author>Mark Wentink</author>
+    <guid>https://MarkWentink.github.io/DSED/tags/python/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

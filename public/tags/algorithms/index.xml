@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Algorithms - Tag - Data Science Every Day</title>
+        <link>https://MarkWentink.github.io/DSED/tags/algorithms/</link>
+        <description>Algorithms - Tag - Data Science Every Day</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="https://MarkWentink.github.io/DSED/tags/algorithms/" rel="self" type="application/rss+xml" /><item>
+    <title>Shortest path-finding with Dijkstra&#39;s algorithm</title>
+    <link>https://MarkWentink.github.io/DSED/posts/dijkstra/</link>
+    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
+    <author>MW</author>
+    <guid>https://MarkWentink.github.io/DSED/posts/dijkstra/</guid>
+    <description><![CDATA[<p>In my previous post, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
+<p>Let&rsquo;s have a look here at what an implementation of that could look like.</p>]]></description>
+</item>
+</channel>
+</rss>

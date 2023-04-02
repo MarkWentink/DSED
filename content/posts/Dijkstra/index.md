@@ -9,7 +9,7 @@ description: "This article shows a basic implementation of Dijkstra's algorithm.
 images: []
 resources:
 - name: featured-image
-  src: imaze.jpg
+  src: maze.jpg
 - name: featured-image-preview
   src: maze.jpg
 tags: ["Python", "Algorithms"]

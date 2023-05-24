@@ -9,8 +9,7 @@
     <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
     <author>MW</author>
     <guid>https://MarkWentink.github.io/DSED/posts/dijkstra/</guid>
-    <description><![CDATA[<p>In my previous post, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
-<p>Let&rsquo;s have a look here at what an implementation of that could look like.</p>]]></description>
+    <description><![CDATA[<p>In <a href="https://MarkWentink.github.io/DSED/posts/first_post/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>]]></description>
 </item>
 <item>
     <title>First_post</title>

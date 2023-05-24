@@ -8,8 +8,8 @@
 <meta property="og:description" content="This article shows a basic implementation of Dijkstra&#39;s algorithm." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/dijkstra/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra/maze.jpg"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-12-01T21:57:40+08:00" />
-<meta property="article:modified_time" content="2023-04-02T16:54:32+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta property="article:published_time" content="2023-05-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-24T14:03:51+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra/maze.jpg"/>
 <meta name="twitter:title" content="Shortest path-finding with Dijkstra&#39;s algorithm"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra\/maze.jpg",
                             "width":  4000 ,
                             "height":  2672 
-                        }],"genre": "posts","keywords": "Python, Algorithms","wordcount":  2273 ,
-        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra\/","datePublished": "2019-12-01T21:57:40+08:00","dateModified": "2023-04-02T16:54:32+01:00","publisher": {
+                        }],"genre": "posts","wordcount":  2273 ,
+        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra\/","datePublished": "2023-05-24T00:00:00+00:00","dateModified": "2023-05-24T14:03:51+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -50,7 +50,7 @@
             <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>DSED</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/DSED/posts/"> Posts </a><a class="menu-item" href="/DSED/tags/"> Tags </a><a class="menu-item" href="/DSED/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/DSED/posts/"> Posts </a><a class="menu-item" href="/DSED/categories/"> Categories </a><a class="menu-item" href="/DSED/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -92,7 +92,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/DSED/posts/" title="">Posts</a><a class="menu-item" href="/DSED/tags/" title="">Tags</a><a class="menu-item" href="/DSED/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/DSED/posts/" title="">Posts</a><a class="menu-item" href="/DSED/categories/" title="">Categories</a><a class="menu-item" href="/DSED/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -103,8 +103,8 @@
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Shortest path-finding with Dijkstra's algorithm</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>MW</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-12-01">2019-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2273 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>MW</a></span>&nbsp;<span class="post-category">included in <a href="/DSED/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a>&nbsp;<a href="/DSED/categories/algorithms/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Algorithms</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2273 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -321,19 +321,19 @@ Total nodes: 7011
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-04-02&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/dd31419f8fffb22d32b79a3282553bfe47f38025" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) dd31419f8fffb22d32b79a3282553bfe47f38025: d">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>dd31419</a></span>
+                <span>Updated on 2023-05-24&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/cca612716a73d06461c28c37b82edfd11c15e7b6" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) cca612716a73d06461c28c37b82edfd11c15e7b6: finalised Dijkstra">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>cca6127</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm" data-hashtags="Python,Algorithms"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra/" data-title="Shortest path-finding with Dijkstra&#39;s algorithm"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/DSED/tags/python/">Python</a>,&nbsp;<a href="/DSED/tags/algorithms/">Algorithms</a></section>
+        <section class="post-tags"></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/DSED/">Home</a></span>
         </section>
@@ -343,8 +343,7 @@ Total nodes: 7011
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/DSED/" target="_blank">Mark Wentink</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="about/" target="_blank">Mark Wentink</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

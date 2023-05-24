@@ -3,13 +3,15 @@
         <title>All Posts - Data Science Every Day</title>
         <link>https://MarkWentink.github.io/DSED/posts/</link>
         <description>All Posts | Data Science Every Day</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</lastBuildDate><atom:link href="https://MarkWentink.github.io/DSED/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>wentink.mark@gmail.com (Mark Wentink)</managingEditor>
+            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Wed, 24 May 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://MarkWentink.github.io/DSED/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Shortest path-finding with Dijkstra&#39;s algorithm</title>
     <link>https://MarkWentink.github.io/DSED/posts/dijkstra/</link>
-    <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate>
+    <pubDate>Wed, 24 May 2023 00:00:00 &#43;0000</pubDate>
     <author>MW</author>
     <guid>https://MarkWentink.github.io/DSED/posts/dijkstra/</guid>
-    <description><![CDATA[<p>In <a href="https://MarkWentink.github.io/DSED/posts/first_post/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>]]></description>
+    <description><![CDATA[<p>In <a href="https://MarkWentink.github.io/DSED/posts/first_post/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
+<p>To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>]]></description>
 </item>
 <item>
     <title>First_post</title>

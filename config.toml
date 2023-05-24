@@ -35,8 +35,8 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 # Author config
 [author]
   name = "Mark Wentink"
-  email = ""
-  link = ""
+  email = "wentink.mark@gmail.com"
+  link = "about/" 
 
 
 # Menu config
@@ -54,19 +54,19 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     title = ""
   [[menu.main]]
     weight = 2
-    identifier = "tags"
+    identifier = "categories"
     pre = ""
+    name = "Categories"
     post = ""
-    name = "Tags"
-    url = "/tags/"
+    url = "/categories/"
     title = ""
   [[menu.main]]
     weight = 3
-    identifier = "categories"
+    identifier = "About"
     pre = ""
+    name = "About"
     post = ""
-    name = "Categories"
-    url = "/categories/"
+    url = "/about/"
     title = ""
 
 [params]
@@ -111,7 +111,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # LoveIt NEW | 0.2.0 Custom content (HTML format is supported)
     custom = ''
     # LoveIt NEW | 0.2.0 whether to show Hugo and theme info
-    hugo = true
+    hugo = false
     # LoveIt NEW | 0.2.0 whether to show copyright info
     copyright = false
     # LoveIt NEW | 0.2.0 whether to show the author
@@ -209,13 +209,13 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 # Social config about the author
   [params.social]
-    GitHub = "xxxx"
-    Linkedin = ""
+    GitHub = "MarkWentink"
+    Linkedin = "mark-wentink-793217116"
     Medium = ""
     Stackoverflow = ""
     Kaggle = ""
-    Email = "xxxx@xxxx.com"
-    RSS = true # LoveIt NEW | 0.2.0
+    Email = "wentink.mark@gmail.com"
+    RSS = false # LoveIt NEW | 0.2.0
 
 # LoveIt CHANGED | 0.2.0 Page global config
   [params.page]
@@ -285,7 +285,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       enable = true
       Twitter = true
       Facebook = true
-      Linkedin = false
+      Linkedin = true
       Whatsapp = false
       Pinterest = false
       Tumblr = false
@@ -332,7 +332,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         avatar = "mp"
         meta= ""
         pageSize = 10
-        # automatically adapt the current theme i18n configuration when empty
+        # automatically adapt the current theme in configuration when empty
         lang = ""
         visitor = true
         recordIP = true

@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Data Science Every Day</title>
-        <link>https://MarkWentink.github.io/DSED/</link>
-        <description>Let the data do the work</description>
+        <title>Algorithms - Category - Data Science Every Day</title>
+        <link>https://MarkWentink.github.io/DSED/categories/algorithms/</link>
+        <description>Algorithms - Category - Data Science Every Day</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>wentink.mark@gmail.com (Mark Wentink)</managingEditor>
-            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Wed, 24 May 2023 00:00:00 &#43;0000</lastBuildDate>
-            <atom:link href="https://MarkWentink.github.io/DSED/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Wed, 24 May 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://MarkWentink.github.io/DSED/categories/algorithms/" rel="self" type="application/rss+xml" /><item>
     <title>Shortest path-finding with Dijkstra&#39;s algorithm</title>
     <link>https://MarkWentink.github.io/DSED/posts/dijkstra/</link>
     <pubDate>Wed, 24 May 2023 00:00:00 &#43;0000</pubDate>
@@ -14,14 +12,6 @@
     <guid>https://MarkWentink.github.io/DSED/posts/dijkstra/</guid>
     <description><![CDATA[<p>In <a href="https://MarkWentink.github.io/DSED/posts/first_post/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
 <p>To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>]]></description>
-</item>
-<item>
-    <title>First_post</title>
-    <link>https://MarkWentink.github.io/DSED/posts/first_post/</link>
-    <pubDate>Sat, 01 Apr 2023 17:34:30 &#43;0100</pubDate>
-    <author>Mark Wentink</author>
-    <guid>https://MarkWentink.github.io/DSED/posts/first_post/</guid>
-    <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

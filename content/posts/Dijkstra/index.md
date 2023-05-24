@@ -1,7 +1,7 @@
 ---
-weight: 4
+weight: 1
 title: "Shortest path-finding with Dijkstra's algorithm"
-date: 2019-12-01T21:57:40+08:00
+date: 2023-05-24
 draft: false
 author: "MW"
 authorLink: "https://MarkWentink.github.io/DSED"
@@ -12,7 +12,7 @@ resources:
   src: maze.jpg
 - name: featured-image-preview
   src: maze.jpg
-tags: ["Python", "Algorithms"]
+categories: ["Python", "Algorithms"]
 
 lightgallery: true
 ---
@@ -20,9 +20,9 @@ lightgallery: true
 
 In [my previous post]({{< ref "first_post" >}}), I described how **Dijkstra's algorithm** allows us to make our way through mazes, maps, and other graphs, finding *the shortest path between a start and end point.*
 
-<!--more-->
-
 To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, **Advent of Code**. 
+
+<!--more-->
 
 ### Advent of Code
 

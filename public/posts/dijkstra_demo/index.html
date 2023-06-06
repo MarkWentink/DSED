@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Climbing Mountains: an implementation of Dijkstra&#39;s algorithm - Data Science Every Day</title><meta name="Description" content="This article presents a basic implementation of Dijkstra&#39;s algorithm."><meta property="og:title" content="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm" />
+<meta property="og:description" content="This article presents a basic implementation of Dijkstra&#39;s algorithm." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/maze.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-24T00:00:00+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/maze.jpg"/>
+<meta name="twitter:title" content="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"/>
+<meta name="twitter:description" content="This article presents a basic implementation of Dijkstra&#39;s algorithm."/>
+<meta name="application-name" content="Data Science Every Day">
+<meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" /><link rel="prev" href="https://MarkWentink.github.io/DSED/posts/first_post/" /><link rel="next" href="https://MarkWentink.github.io/DSED/posts/path_finding/" /><link rel="stylesheet" href="/DSED/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Climbing Mountains: an implementation of Dijkstra's algorithm",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/maze.jpg",
+                            "width":  4000 ,
+                            "height":  2672 
+                        }],"genre": "posts","wordcount":  2264 ,
+        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/","datePublished": "2023-05-24T00:00:00+00:00","dateModified": "2023-05-24T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "MW"
+            },"description": "This article presents a basic implementation of Dijkstra's algorithm."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>DSED</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/DSED/posts/"> Posts </a><a class="menu-item" href="/DSED/categories/"> Categories </a><a class="menu-item" href="/DSED/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>DSED</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/DSED/posts/" title="">Posts</a><a class="menu-item" href="/DSED/categories/" title="">Categories</a><a class="menu-item" href="/DSED/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Climbing Mountains: an implementation of Dijkstra's algorithm</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>MW</a></span>&nbsp;<span class="post-category">included in <a href="/DSED/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a>&nbsp;<a href="/DSED/categories/algorithms/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Algorithms</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2264 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/DSED/svg/loading.min.svg"
+        data-src="/DSED/posts/dijkstra_demo/maze.jpg"
+        data-srcset="/DSED/posts/dijkstra_demo/maze.jpg, /DSED/posts/dijkstra_demo/maze.jpg 1.5x, /DSED/posts/dijkstra_demo/maze.jpg 2x"
+        data-sizes="auto"
+        alt="/DSED/posts/dijkstra_demo/maze.jpg"
+        title="This article presents a basic implementation of Dijkstra&#39;s algorithm." /></div><div class="content" id="content"><p>In <a href="https://MarkWentink.github.io/DSED/posts/path_finding/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
+<p>To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>
+<h3 id="advent-of-code">Advent of Code</h3>
+<p>Every year, <a href="https://adventofcode.com/2022/day/12" target="_blank" rel="noopener noreffer ">Advent of Code (AoC)</a> publishes a coding challenge every day of December leading up to Christmas. The challenges can be solved in any language, and typically involve algorithmic or dynamic programming to solve within reasonable time. I find them tho be great ways to hone my coding skills!</p>
+<p>Most years, Dijkstra&rsquo;s algorithm comes in handy on one day or another. Below is the example of AoC 2022, day 12.</p>
+<h3 id="the-challenge">The Challenge</h3>
+<blockquote>
+<p>You are given a heightmap of the surrounding area (your puzzle input). The heightmap shows the local area from above broken into a grid; the elevation of each square of the grid is given by a single lowercase letter, where a is the lowest elevation, b is the next-lowest, and so on up to the highest elevation, z. Also included on the heightmap are marks for your current position (S) and the exit (E). Your current position (S) has elevation a, and the exit (E) has elevation z.</p>
+<p>You&rsquo;d like to reach E, but to save energy, you should do it in as few steps as possible. During each step, you can move exactly one square up, down, left, or right.</p>
+<p>To avoid needing to get out your climbing gear, the elevation of the destination square can be at most one higher than the elevation of your current square; that is, if your current elevation is m, you could step to elevation n, but not to elevation o. (This also means that the elevation of the destination square can be much lower than the elevation of your current square.)</p>
+</blockquote>
+<p>This is a perfect use case for Dijkstra&rsquo;s algorithm! We need to find the shortest path from S to E.</p>
+<p>Note that we have some further restrictions on how we are allowed to travel: We can take one step up, down, left or right at a time, and we can either stay on the same elevation, go up <strong>one</strong> level, or go down as many as we like.</p>
+<p>Let&rsquo;s first make this a bit more concrete by visualising the input. To make it easier to work with later, we will load in the data as numbers (matching the ASCII code for lowercase letters), but we will print them on screen as letters. Let&rsquo;s first write ourselves a function that loads the input data from a .txt file into a Numpy array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    The input for AoC challenges are always unique to each player, and are given as .txt files. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">    To easily work with the data later on, we will read it from the text file and store each 
+</span></span></span><span class="line"><span class="cl"><span class="s1">    character as the corresponding ASCII code in a numpy array cell.
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;day12.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span></code></pre></div><p>Next, let&rsquo;s check out the map we are given:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span> <span class="c1"># Convert back to letters for the visualisation</span>
+</span></span></code></pre></div><a class="lightgallery" href="./map.png" title="./map.png" data-thumbnail="./map.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./map.png"
+            data-srcset="./map.png, ./map.png 1.5x, ./map.png 2x"
+            data-sizes="auto"
+            alt="./map.png" width="780px" height="400px" />
+    </a>
+<p>That&rsquo;s a big mess of letters! I&rsquo;ve highlighted the starting point <code>S</code> (which has elevation &lsquo;a&rsquo;), and the end point <code>E</code> (elevation &lsquo;z&rsquo;) for clarity. Each letter corresponds to a position on this map. In graph theory speak, we refer to points or locations as <em>nodes</em>, which is the term I will adopt here. We will refer to these nodes as <em>visited</em> once we have processed them.</p>
+<p>Now how do we get from Start to End across this mountain range of letters?</p>
+<p>Let&rsquo;s consider the shortest path possible, just straight ahead from the start point:</p>
+<a class="lightgallery" href="./map_wrong.png" title="./map_wrong.png" data-thumbnail="./map_wrong.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./map_wrong.png"
+            data-srcset="./map_wrong.png, ./map_wrong.png 1.5x, ./map_wrong.png 2x"
+            data-sizes="auto"
+            alt="./map_wrong.png" width="780" height="450" />
+    </a>
+<p>All is well for the first few steps. The first step requires moving from elevation <code>a</code> to <code>b</code>, which is allowed, and then from <code>b</code> to <code>c</code> next. We then stay on <code>c</code> for two steps and drop back down to <code>a</code>. Remember we are allowed to drop as many levels as we like.</p>
+<p>But after a few more steps we get stuck, as we would need to climb from <code>a</code> to <code>c</code> next, which is two steps, i.e. not allowed.</p>
+<p>So much for our straight path approach&hellip;</p>
+<p>Ultimately, we are going to need to follow a path that winds around steep cliffs, slowly making its way across the mountain range. The red path below could be a good starting point, but ultimately, we need to find <em>the shortest path</em>.</p>
+<a class="lightgallery" href="./map_right.png" title="./map_right.png" data-thumbnail="./map_right.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./map_right.png"
+            data-srcset="./map_right.png, ./map_right.png 1.5x, ./map_right.png 2x"
+            data-sizes="auto"
+            alt="./map_right.png" width="780" height="450" />
+    </a>
+<p>Let&rsquo;s harness Dijkstra&rsquo;s algorithm to make it happen!</p>
+<p>Dijkstra&rsquo;s algorithm helps us calculate the shortest distance from every point on the map to the starting point. (We need to do an exhaustive search to ensure we have in fact the <em>shortest</em> path.)</p>
+<p>A single step will be considered a distance of one. So all the neighbours to the starting point will be at distance 1, and a point diagonal from the starting point will be distance 2 (as we can only move up, down, left, right).</p>
+<p>The exact steps are outlined below.</p>
+<h3 id="implementation">Implementation</h3>
+<p><strong>Note</strong>: This section will read a lot easier if you browse <a href="https://MarkWentink.github.io/DSED/posts/path_finding/" rel="">my introduction post on Dijkstra&rsquo;s algorithm</a>, which goes into more detail of the algorithm itself.</p>
+<p>We will take the following steps in our implementation:</p>
+<ol>
+<li>Make a list of all the nodes we haven&rsquo;t visited yet. At the start, this is <em>all</em> of them.</li>
+<li>Create a matching dictionary of nodes to record their corresponding shortest distance from the start. We will start these off as infinite distance, and update them whenever we find a shorter path from that node.</li>
+<li>Set the distance dictionary entry for the starting point to 0.</li>
+<li>Set the starting point as the &lsquo;current&rsquo; node.</li>
+<li>In a loop, while the end node hasn&rsquo;t been visited yet:
+<ul>
+<li>Find unvisited neighbours to the current node</li>
+<li>For each neighbour, check whether they are accessible (i.e. their elevation is at most 1 higher than the current node)</li>
+<li>If accessible, we can take a step there, meaning their distance from the starting point (via the current node) is one further than the current node. If that distance is smaller than what is curently recorded in the dictionary, overwrite it.</li>
+<li>Remove the current node from the &rsquo;not visited&rsquo; list.</li>
+<li>Choose the next current node: Out of those that we haven&rsquo;t visited yet, pick the one with the smallest recorded distance.</li>
+</ul>
+</li>
+<li>By the end of the loop, the dictionary entry for the end point will be the nr of steps required to get there via the shortest path.</li>
+</ol>
+<p>Before we start, we&rsquo;ll first convert the elevations to numbers 1-26 for easier comparison, and then we will unleash Dijkstra&rsquo;s algorithm to calculate the distance from start to exit. Currently, we have our letters stored as ascii codes. The ascii code for <code>a</code> is <code>97</code> and the rest of the lowercase alphabet is consecutive after that, so we will subtract 96 from every entry to turn it into a <code>1-26</code> range. This does mess up our <code>S</code> and <code>E</code> nodes, which we will reset later.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">-</span> <span class="mi">96</span>
+</span></span></code></pre></div><hr>
+<p><strong>1. Make a list of all the nodes we haven&rsquo;t visited yet. At the start, this is all of them.</strong></p>
+<p>Our map is rectangular, so we can generate a list of tuple coordinates by borrowing the <code>product()</code> function from <code>itertools</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">itertools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Map size: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">not_visited</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Top left: </span><span class="si">{</span><span class="n">not_visited</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Bottom right: </span><span class="si">{</span><span class="n">not_visited</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Total nodes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">not_visited</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Map size: (41, 171)
+Top left: (0, 0)
+Bottom right: (40, 170)
+Total nodes: 7011
+</code></pre>
+<p>That looks good. Our map is 41 nodes high and 171 nodes wide. We start in the top left corner with coordinates <code>(0, 0)</code>, make our way to <code>(0, 170)</code> in the top right, and then wrap around to <code>(1, 0)</code> and so on, all the way to <code>(40, 170)</code> in the bottom right.</p>
+<hr>
+<p><strong>2. Create a dictionary of nodes to record their corresponding shortest distance from the start. These will all start at infinity, and get updated whenever we find a shorter path to that node.</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">distances</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">not_visited</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">distances</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># If you are feeling adventurous, you can do this with a dictionary comprehension: </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># distances = {node:np.inf for node in not_visited}</span>
+</span></span></code></pre></div><p>We now have a dictionary that for each node (each location defined by a tuple of coordinates), records its distance from the starting point. At the start, we set all of them to infinite distance, as we don&rsquo;t know anything about possible paths yet.</p>
+<hr>
+<p><strong>3. Change the recorded distance for the starting point to 0.</strong></p>
+<p>We now need to find the coordinates of our starting point <code>S</code>, and set its distance to <code>0</code>.</p>
+<p>After converting our entries <code>a-z</code> to numbers <code>1-26</code>, our starting point <code>S</code> has now shifted to number <code>-13</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Find S</span>
+</span></span><span class="line"><span class="cl"><span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="o">-</span><span class="mi">13</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># np.where returns a tuple of arrays, so we need to extract the coordinates first</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_loc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Edit the distance dictionary to set the starting point distance to 0.</span>
+</span></span><span class="line"><span class="cl"><span class="n">distances</span><span class="p">[</span><span class="n">start_loc</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Starting point at </span><span class="si">{</span><span class="n">start_loc</span><span class="si">}</span><span class="s2">. Distance set to </span><span class="si">{</span><span class="n">distances</span><span class="p">[</span><span class="n">start_loc</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Starting point at (20, 0). Distance set to 0
+</code></pre>
+<p>Our starting point is halfway down the first column on our map. The exit is somewhere on the right. We need to locate it before we can start our Dijkstra loop. As with the <code>S</code> for start, our <code>E</code> for end has shifted, and we are looking for number <code>-27</code>.</p>
+<p>Once we have located the start and end points, we need to reset their elevations to play nice when compared to the other nodes, and then our final step will be to set the start as our current node.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Find E</span>
+</span></span><span class="line"><span class="cl"><span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="o">-</span><span class="mi">27</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract coordinates</span>
+</span></span><span class="line"><span class="cl"><span class="n">end_loc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;End point at </span><span class="si">{</span><span class="n">end_loc</span><span class="si">}</span><span class="s2">. Current distance is </span><span class="si">{</span><span class="n">distances</span><span class="p">[</span><span class="n">end_loc</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Reset starting location to lowest elevation</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">146</span><span class="p">]</span> <span class="o">=</span> <span class="mi">26</span> <span class="c1"># Reset end location to highest elevation</span>
+</span></span></code></pre></div><pre><code>End point at (20, 146). Current distance is inf
+</code></pre>
+<p>Currently, the distance to our end point is infinity, because we have no idea how to get there. Time to start searching!</p>
+<hr>
+<p><strong>4. Set the starting point as the &lsquo;current&rsquo; node.</strong></p>
+<p>To kick off the search loop, we will set the starting point as our current active node, and we&rsquo;ll start inspecting neighbours from there.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">current</span> <span class="o">=</span> <span class="n">start_loc</span>
+</span></span></code></pre></div><hr>
+<p><strong>5. In a loop, while the end node hasn&rsquo;t been visited yet:</strong></p>
+<p>We identify allowed neighbours (i.e. not off the edge of the map, not already visited, and not too much higher in elevation), and for each check if a path via the current node, with distance current_distance + 1, is better than what was already recorded. Considering all nodes start at infinite distance, the first path towards them starts as the best path. Future paths will only overwrite this is their distance is shorter.</p>
+<p>Once we have processed all the neighbours, the current node is checked off the <code>not_visited</code> list, and a next current node is picked, from the <code>not_visited</code> list, based on which one currently has the lowest recorded distance.</p>
+<p>We keep going until we have processed the target node, <code>E</code> (<code>end_loc</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">while</span> <span class="n">end_loc</span> <span class="ow">in</span> <span class="n">not_visited</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">neighbours</span> <span class="o">=</span> <span class="p">[(</span><span class="n">current</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">current</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>  <span class="c1"># Generate all direct neighbours...</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">current</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>  <span class="c1"># as long as their row nr doesn&#39;t fall off the map...</span>
+</span></span><span class="line"><span class="cl">        <span class="ow">and</span> <span class="p">(</span><span class="n">current</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">171</span><span class="p">)))</span> <span class="c1"># and their column nr doesn&#39;t fall off the map...</span>
+</span></span><span class="line"><span class="cl">        <span class="ow">and</span> <span class="p">(</span><span class="n">current</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">current</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">not_visited</span><span class="p">]</span> <span class="c1"># and the neighbour hasn&#39;t been visited yet.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check that the elevation change is allowed </span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1"># If that distance value is smaller than what was currently recorded, update the dictionary.</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">distances</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">distances</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">    <span class="c1"># Remove current node from not_visited (i.e. tick it off the to-do list)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">not_visited</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Pick the next current node from not_visisted with the smallest distance</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># We need to account for the case where we may have visited every location and ran out of next options.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">not_visited</span> <span class="o">!=</span> <span class="p">[]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">current</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">not_visited</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distances</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span></code></pre></div><p>Once the end node has been processed, we are confident that the value recorded for its distance is now the shortest one.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The final distance for the end point is </span><span class="si">{</span><span class="n">distances</span><span class="p">[</span><span class="n">end_loc</span><span class="p">]</span><span class="si">}</span><span class="s2"> steps.&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>The final distance for the end point is 520 steps.
+</code></pre>
+<p>Note this doesn&rsquo;t tell us <strong>what</strong> the shortest path was, only how long it was.</p>
+<p>Although, to help visualise what we&rsquo;ve ended up with, I&rsquo;ve drawn out the (rather windy) path on our map. It looks like most of the path length comes from having to slowly spiral up the mountain on the right.</p>
+<a class="lightgallery" href="./map_complete.png" title="./map_complete.png" data-thumbnail="./map_complete.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./map_complete.png"
+            data-srcset="./map_complete.png, ./map_complete.png 1.5x, ./map_complete.png 2x"
+            data-sizes="auto"
+            alt="./map_complete.png" width="780px" height="400px" />
+    </a>
+<h3 id="you-have-arrived-at-your-destination">You have arrived at your destination</h3>
+<p>Hopefully, you&rsquo;ve seen that the implementation of Dijkstra&rsquo;s algorithm itself is not too laborious, but the trick is in formulating your problem in the context of nodes connected by some distance or cost. In the case of steps through a maze, it is easy: nodes are always 1 distance away from their neighbours. But think about a railway network of interconnected stations: every station will be some variable distance from its &rsquo;neighbours&rsquo;. In this case, we would also need some lookup table of &lsquo;cost&rsquo; to travel from one node to the next.</p>
+<p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" data-title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" data-title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" data-title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" data-title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/DSED/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/DSED/posts/first_post/" class="prev" rel="prev" title="First_post"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>First_post</a>
+            <a href="/DSED/posts/path_finding/" class="next" rel="next" title="This is the way: Shortest path-finding with Dijkstra&#39;s algorithm">This is the way: Shortest path-finding with Dijkstra's algorithm<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="about/" target="_blank">Mark Wentink</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":35},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/DSED/js/theme.min.js"></script></body>
+</html>

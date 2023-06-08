@@ -3,7 +3,7 @@ weight: 1
 title: "This is the way: Shortest path-finding with Dijkstra's algorithm"
 date: 2023-05-25
 draft: false
-author: "MW"
+author: "M Wentink"
 authorLink: "https://MarkWentink.github.io/DSED"
 description: "This article introduces Dijkstra's algorithm, and its use in path-finding."
 images: []
@@ -12,16 +12,18 @@ resources:
   src: intro_maze.jpg
 - name: featured-image-preview
   src: intro_maze.jpg
-categories: ["Python", "Algorithms"]
+#categories: ["Python", "Algorithms"]
 
 lightgallery: true
 ---
 
 You wake up from a crazy evening at a Data Science conference in the middle of a cornfield maze. You look to your left, and see corn. To your right, corn. You have no idea how you got here, nor how to get back to civilisation in time for the rest of the conference!
 
+<!--more-->
+
+
 Fortunately, you are good at thinking on your feet. 
 
-<!--more-->
 
 > Are you being chased by a minotaur and need a way out quick? Jump straight to the [path-finding section](#shortest-path-finding), or the [Dijkstra's algorithm walkthrough](#dijkstras-algorithm).
 
@@ -169,15 +171,16 @@ For our final level of detail, let's take an almost pseudo-code approach, introd
 > **Detail level 3:**
 >
 > 1. Create a `not_visited` list of all accessible nodes.
-> 2. Create a dictionary or table for distance values, starting all nodes except the start point at `infinite` distance. The start point gets distance `0`.
-> 3. Mark the start point as the `current` node.
-> 4. For each accessible neighbour of the current node: 
->    - check if it has already been visited. If so, skip it.
+> 2. Create a dictionary or table for distance values, starting all nodes except the start point at `infinite` distance. 
+> 3. Set the distance entry for the start point to `0`.
+> 4. Mark the start point as the `current` node.
+> 5. For each (accessible) neighbour of the current node: 
+>    - check if it has already been visited (i.e. if it's been removed from not_visited). If so, skip it.
 >    - If the neighbour is still in `not_visited`, calculate its distance as the distance value of the current node, plus the cost of traveling between them.  
 >    - If that calculated distance is less than what's currently recorded, overwrite the recorded value.  
-> 5. When all neighbours are processed, remove the current node from not_visited.
-> 6. Pick the node from not_visited with the lowest distance value as the next current node. 
-> 7. Repeat steps 3-7 until the exit node has been processed. 
+> 6. When all neighbours are processed, remove the current node from not_visited.
+> 7. Pick the node from not_visited with the lowest distance value as the next current node. 
+> 8. Repeat steps 3-7 until the target node has been processed. 
 
 
 To explore the code implementation in a bit more detail, I have taken an example from one of my favourite coding challenges, Advent of Code. You can read about it in [Climbing Mountains]({{< ref "Dijkstra_demo" >}})

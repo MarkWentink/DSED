@@ -3,8 +3,8 @@ weight: 1
 title: "Climbing Mountains: an implementation of Dijkstra's algorithm"
 date: 2023-05-24
 draft: false
-author: "MW"
-authorLink: "https://MarkWentink.github.io/DSED"
+author: "M Wentink"
+authorLink: ""
 description: "This article presents a basic implementation of Dijkstra's algorithm."
 images: []
 resources:
@@ -12,7 +12,7 @@ resources:
   src: maze.jpg
 - name: featured-image-preview
   src: maze.jpg
-categories: ["Python", "Algorithms"]
+#categories: ["Python", "Algorithms"]
 
 lightgallery: true
 ---
@@ -20,7 +20,7 @@ lightgallery: true
 
 In [my previous post]({{< ref "Path_finding" >}}), I described how **Dijkstra's algorithm** allows us to make our way through mazes, maps, and other graphs, finding *the shortest path between a start and end point.*
 
-To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, **Advent of Code**. 
+To illustrate what a code implementation might look like, I will use a challenge from my favourite coding event, **Advent of Code**. 
 
 <!--more-->
 

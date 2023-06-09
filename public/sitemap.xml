@@ -2,12 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://MarkWentink.github.io/DSED/posts/path_finding/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/posts/dijkstra_demo/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/categories/algorithms/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/categories/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/posts/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
-            <loc>https://MarkWentink.github.io/DSED/categories/python/</loc><lastmod>2023-06-06T17:07:44&#43;01:00</lastmod></url><url>
+            <loc>https://MarkWentink.github.io/DSED/posts/path_finding/</loc><lastmod>2023-06-08T12:09:01&#43;01:00</lastmod></url><url>
+            <loc>https://MarkWentink.github.io/DSED/posts/dijkstra_demo/</loc><lastmod>2023-06-08T12:09:01&#43;01:00</lastmod></url><url>
+            <loc>https://MarkWentink.github.io/DSED/</loc><lastmod>2023-06-08T12:09:01&#43;01:00</lastmod></url><url>
+            <loc>https://MarkWentink.github.io/DSED/posts/</loc><lastmod>2023-06-08T12:09:01&#43;01:00</lastmod></url><url>
             <loc>https://MarkWentink.github.io/DSED/about/</loc><lastmod>2023-05-24T14:42:17&#43;01:00</lastmod></url><url>
+            <loc>https://MarkWentink.github.io/DSED/categories/</loc></url><url>
             <loc>https://MarkWentink.github.io/DSED/tags/</loc></url></urlset>

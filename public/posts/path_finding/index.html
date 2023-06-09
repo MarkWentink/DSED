@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/path_finding/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/path_finding/intro_maze.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-25T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-06-06T17:07:44+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta property="article:modified_time" content="2023-06-08T12:09:01+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/path_finding/intro_maze.jpg"/>
 <meta name="twitter:title" content="This is the way: Shortest path-finding with Dijkstra&#39;s algorithm"/>
@@ -31,14 +31,14 @@
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/intro_maze.jpg",
-                            "width":  5704 ,
-                            "height":  4000 
-                        }],"genre": "posts","wordcount":  2014 ,
-        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/","datePublished": "2023-05-25T00:00:00+00:00","dateModified": "2023-06-06T17:07:44+01:00","publisher": {
+                            "width":  1854 ,
+                            "height":  1300 
+                        }],"genre": "posts","wordcount":  2069 ,
+        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/","datePublished": "2023-05-25T00:00:00+00:00","dateModified": "2023-06-08T12:09:01+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "MW"
+                "name": "M Wentink"
             },"description": "This article introduces Dijkstra's algorithm, and its use in path-finding."
     }
     </script></head>
@@ -50,7 +50,7 @@
             <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/DSED/posts/"> Posts </a><a class="menu-item" href="/DSED/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -65,14 +65,14 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/DSED/posts/" title="">Posts</a><a class="menu-item" href="/DSED/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
 </header><main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">This is the way: Shortest path-finding with Dijkstra's algorithm</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>MW</a></span>&nbsp;<span class="post-category">included in <a href="/DSED/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a>&nbsp;<a href="/DSED/categories/algorithms/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Algorithms</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-25">2023-05-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2014 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-25">2023-05-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2069 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -256,16 +256,16 @@
 </blockquote>
 <p>To explore the code implementation in a bit more detail, I have taken an example from one of my favourite coding challenges, Advent of Code. You can read about it in <a href="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" rel="">Climbing Mountains</a></p>
 <h3 id="a-note-on-time-complexity">A note on Time Complexity</h3>
-<p>So how long does that take to run? In this simple implementation of the algorithm, we need to process every node once, and for each node, we need to consider all its connections.</p>
-<p>When calculating time complexities, we always consider the worst case scenario. In this case, the worst case scenario is when every node is connected to every other node. That way, for $V$ nodes (v for vertex), we need to check $V-1$ neighbours. So as the nr of nodes goes up, our processing time goes up by $V*(V-1)$ which we approximate as $(V^2)$.</p>
+<p>A question we should ask ourselves if we plan to roll out any solution at scale, is how long it takes to run, and how much slower it gets on bigger datasets (mazes). In this simple implementation of the algorithm, we need to process every node once, and for each node, we need to consider all its neighbours. For our maze, that means we need to do up to $4* nodes$ checks.</p>
+<p>Generally, when calculating time complexities, we consider the worst case scenario. In the general version of Dijkstra&rsquo;s algorithm, the worst case scenario is when every node is connected to every other node. That way, for $V$ nodes (v for vertex), we need to check $V-1$ neighbours. So, as the nr of nodes goes up, our processing time goes up by $V*(V-1)$ which we approximate as $(V^2)$. As we double the nr of nodes, processing time goes up x4.</p>
 <p>More recent versions of Dijkstra&rsquo;s implementation, making use of binary tree structures, scale better on large networks.</p>
 <hr>
 <p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-06-06&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/725e8f74194fb9c97c9d198b515daed1f2c0dfb4" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 725e8f74194fb9c97c9d198b515daed1f2c0dfb4: Update Dijkstra">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>725e8f7</a></span>
+                <span>Updated on 2023-06-08&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/000907d441f9eba489e7ae69842b12b50b198be3" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 000907d441f9eba489e7ae69842b12b50b198be3: Cleaning up and compress jpeg">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>000907d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -284,10 +284,8 @@
 
     <div class="post-nav"><a href="/DSED/posts/dijkstra_demo/" class="prev" rel="prev" title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Climbing Mountains: an implementation of Dijkstra's algorithm</a></div>
 </div>
-<div id="comments"></div></article></div>
-            </main>
-            
-        </div>
+</article></div>
+            </main></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>

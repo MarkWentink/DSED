@@ -187,9 +187,9 @@ To explore the code implementation in a bit more detail, I have taken an example
 
 ### A note on Time Complexity
 
-So how long does that take to run? In this simple implementation of the algorithm, we need to process every node once, and for each node, we need to consider all its connections. 
+A question we should ask ourselves if we plan to roll out any solution at scale, is how long it takes to run, and how much slower it gets on bigger datasets (mazes). In this simple implementation of the algorithm, we need to process every node once, and for each node, we need to consider all its neighbours. For our maze, that means we need to do up to $4* nodes$ checks.
 
-When calculating time complexities, we always consider the worst case scenario. In this case, the worst case scenario is when every node is connected to every other node. That way, for $V$ nodes (v for vertex), we need to check $V-1$ neighbours. So as the nr of nodes goes up, our processing time goes up by $V*(V-1)$ which we approximate as $(V^2)$.
+Generally, when calculating time complexities, we consider the worst case scenario. In the general version of Dijkstra's algorithm, the worst case scenario is when every node is connected to every other node. That way, for $V$ nodes (v for vertex), we need to check $V-1$ neighbours. So, as the nr of nodes goes up, our processing time goes up by $V*(V-1)$ which we approximate as $(V^2)$. As we double the nr of nodes, processing time goes up x4.
 
 More recent versions of Dijkstra's implementation, making use of binary tree structures, scale better on large networks.
 

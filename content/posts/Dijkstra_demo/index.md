@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "Climbing Mountains: an implementation of Dijkstra's algorithm"
 date: 2023-05-24
 draft: false

@@ -8,19 +8,18 @@
     <title>This is the way: Shortest path-finding with Dijkstra&#39;s algorithm</title>
     <link>https://MarkWentink.github.io/DSED/posts/path_finding/</link>
     <pubDate>Thu, 25 May 2023 00:00:00 &#43;0000</pubDate>
-    <author>MW</author>
+    <author>M Wentink</author>
     <guid>https://MarkWentink.github.io/DSED/posts/path_finding/</guid>
-    <description><![CDATA[<p>You wake up from a crazy evening at a Data Science conference in the middle of a cornfield maze. You look to your left, and see corn. To your right, corn. You have no idea how you got here, nor how to get back to civilisation in time for the rest of the conference!</p>
-<p>Fortunately, you are good at thinking on your feet.</p>]]></description>
+    <description><![CDATA[<p>You wake up from a crazy evening at a Data Science conference in the middle of a cornfield maze. You look to your left, and see corn. To your right, corn. You have no idea how you got here, nor how to get back to civilisation in time for the rest of the conference!</p>]]></description>
 </item>
 <item>
     <title>Climbing Mountains: an implementation of Dijkstra&#39;s algorithm</title>
     <link>https://MarkWentink.github.io/DSED/posts/dijkstra_demo/</link>
     <pubDate>Wed, 24 May 2023 00:00:00 &#43;0000</pubDate>
-    <author>MW</author>
+    <author>M Wentink</author>
     <guid>https://MarkWentink.github.io/DSED/posts/dijkstra_demo/</guid>
     <description><![CDATA[<p>In <a href="https://MarkWentink.github.io/DSED/posts/path_finding/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
-<p>To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>]]></description>
+<p>To illustrate what a code implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>]]></description>
 </item>
 </channel>
 </rss>

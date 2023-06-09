@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/maze.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-24T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-06-06T17:07:44+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta property="article:modified_time" content="2023-06-08T12:09:01+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/maze.jpg"/>
 <meta name="twitter:title" content="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"/>
@@ -31,14 +31,14 @@
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/maze.jpg",
-                            "width":  4000 ,
-                            "height":  2672 
-                        }],"genre": "posts","wordcount":  2264 ,
-        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/","datePublished": "2023-05-24T00:00:00+00:00","dateModified": "2023-06-06T17:07:44+01:00","publisher": {
+                            "width":  2695 ,
+                            "height":  1800 
+                        }],"genre": "posts","wordcount":  2265 ,
+        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/dijkstra_demo\/","datePublished": "2023-05-24T00:00:00+00:00","dateModified": "2023-06-08T12:09:01+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "MW"
+                "name": "M Wentink"
             },"description": "This article presents a basic implementation of Dijkstra's algorithm."
     }
     </script></head>
@@ -50,7 +50,7 @@
             <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/DSED/posts/"> Posts </a><a class="menu-item" href="/DSED/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -65,14 +65,14 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/DSED/posts/" title="">Posts</a><a class="menu-item" href="/DSED/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
 </header><main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Climbing Mountains: an implementation of Dijkstra's algorithm</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>MW</a></span>&nbsp;<span class="post-category">included in <a href="/DSED/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a>&nbsp;<a href="/DSED/categories/algorithms/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Algorithms</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2264 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="about/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2265 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -82,7 +82,7 @@
         data-sizes="auto"
         alt="/DSED/posts/dijkstra_demo/maze.jpg"
         title="This article presents a basic implementation of Dijkstra&#39;s algorithm." /></div><div class="content" id="content"><p>In <a href="https://MarkWentink.github.io/DSED/posts/path_finding/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
-<p>To illustrate what an implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>
+<p>To illustrate what a code implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>
 <h3 id="advent-of-code">Advent of Code</h3>
 <p>Every year, <a href="https://adventofcode.com/2022/day/12" target="_blank" rel="noopener noreffer ">Advent of Code (AoC)</a> publishes a coding challenge every day of December leading up to Christmas. The challenges can be solved in any language, and typically involve algorithmic or dynamic programming to solve within reasonable time. I find them tho be great ways to hone my coding skills!</p>
 <p>Most years, Dijkstra&rsquo;s algorithm comes in handy on one day or another. Below is the example of AoC 2022, day 12.</p>
@@ -289,8 +289,8 @@ Total nodes: 7011
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-06-06&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/725e8f74194fb9c97c9d198b515daed1f2c0dfb4" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 725e8f74194fb9c97c9d198b515daed1f2c0dfb4: Update Dijkstra">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>725e8f7</a></span>
+                <span>Updated on 2023-06-08&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/000907d441f9eba489e7ae69842b12b50b198be3" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 000907d441f9eba489e7ae69842b12b50b198be3: Cleaning up and compress jpeg">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>000907d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -310,10 +310,8 @@ Total nodes: 7011
     <div class="post-nav">
             <a href="/DSED/posts/path_finding/" class="next" rel="next" title="This is the way: Shortest path-finding with Dijkstra&#39;s algorithm">This is the way: Shortest path-finding with Dijkstra's algorithm<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"></div></article></div>
-            </main>
-            
-        </div>
+</article></div>
+            </main></div>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>

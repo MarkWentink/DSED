@@ -16,7 +16,15 @@ hasCJKLanguage = false
 # default amount of posts in each pages
 paginate = 12
 # google analytics code [UA-XXXXXXXX-X]
-googleAnalytics = "G-FV5Q1QPFWK"
+# googleAnalytics = "G-FV5Q1QPFWK"
+  # {{< version 0.2.0 >}} Analytics config
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = "G-FV5Q1QPFWK"
+      # whether to anonymize IP
+      anonymizeIP = true
 # copyright description used only for seo schema
 copyright = ""
 

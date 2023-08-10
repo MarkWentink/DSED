@@ -18,13 +18,7 @@ paginate = 12
 # google analytics code [UA-XXXXXXXX-X]
 # googleAnalytics = "G-FV5Q1QPFWK"
   # {{< version 0.2.0 >}} Analytics config
-  [params.analytics]
-    enable = false
-    # Google Analytics
-    [params.analytics.google]
-      id = "G-FV5Q1QPFWK"
-      # whether to anonymize IP
-      anonymizeIP = true
+
 # copyright description used only for seo schema
 copyright = ""
 
@@ -86,6 +80,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   description = "Let the data do the work"
   # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
+# Google Analytics
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = "G-FV5Q1QPFWK"
+      # whether to anonymize IP
+      anonymizeIP = true
 
 # Header config
   [params.header]

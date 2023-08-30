@@ -12,7 +12,7 @@ resources:
   src: intro_maze.jpg
 - name: featured-image-preview
   src: intro_maze.jpg
-#categories: ["Python", "Algorithms"]
+#categories: ["Algorithms"]
 
 lightgallery: true
 ---

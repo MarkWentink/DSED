@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Buy a coffee, get a half-price pastry: Intro to Association Rules - Data Science Every Day</title><meta name="Description" content="Apriori"><meta property="og:title" content="Buy a coffee, get a half-price pastry: Intro to Association Rules" />
+<meta property="og:description" content="Apriori" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/apriori/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/apriori/pastries.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-09T00:00:00+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/apriori/pastries.jpg"/>
+<meta name="twitter:title" content="Buy a coffee, get a half-price pastry: Intro to Association Rules"/>
+<meta name="twitter:description" content="Apriori"/>
+<meta name="application-name" content="Data Science Every Day">
+<meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://MarkWentink.github.io/DSED/posts/apriori/" /><link rel="next" href="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" /><link rel="stylesheet" href="/DSED/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Buy a coffee, get a half-price pastry: Intro to Association Rules",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/MarkWentink.github.io\/DSED\/posts\/apriori\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/apriori\/pastries.jpg",
+                            "width":  1803 ,
+                            "height":  1288 
+                        }],"genre": "posts","wordcount":  1777 ,
+        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/apriori\/","datePublished": "2023-06-09T00:00:00+00:00","dateModified": "2023-06-09T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "M Wentink"
+            },"description": "Apriori"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Buy a coffee, get a half-price pastry: Intro to Association Rules</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-09">2023-06-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1777 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/DSED/svg/loading.min.svg"
+        data-src="/DSED/posts/apriori/pastries.jpg"
+        data-srcset="/DSED/posts/apriori/pastries.jpg, /DSED/posts/apriori/pastries.jpg 1.5x, /DSED/posts/apriori/pastries.jpg 2x"
+        data-sizes="auto"
+        alt="/DSED/posts/apriori/pastries.jpg"
+        title="Apriori" /></div><div class="content" id="content"><p>Apriori</p>
+<blockquote>
+<p>Not a fan of pastries? Jump straight to the section about the <a href="" rel="">Apriori algorithm</a>.</p>
+</blockquote>
+<p>A long-standing fantasy of mine is to open a coffeeshop one day. Somehow, I imagine this to be a quiet, peaceful existence, completely disregarding the fact that I would have to wake up at 5am to open up shop at 6:30 to get ready for the morning commuters.</p>
+<p>Another minor point I tend to ignore when dreaming about this future is that I&rsquo;ve never run a business or made a flat white in my life&hellip;</p>
+<p>But let&rsquo;s not sweat the small stuff for now! Welcome to DSED Coffee! &ldquo;The perfect drip with a free Data Science tip.&rdquo;</p>
+<h3 id="pastries-for-the-people">Pastries for the people</h3>
+<p>One evening, as I&rsquo;m working through the pile of customer receipts from that day, I notice that a lot of people buy coffee (no surprises there), but most of those people <em>only</em> buy coffee. Wouldn&rsquo;t it be great if we could get them to also buy a pastry while they&rsquo;re here? Everything is better with a pastry!</p>
+<p>Just as I&rsquo;m pondering a &ldquo;Buy a coffee, get a pastry half price&rdquo; deal, a few follow-up questions arise:</p>
+<ul>
+<li><strong>What percentage of coffee buyers are already buying pastries?</strong> My deal would reduce my income from this group because I would be making their order cheaper without actually getting them to buy more.</li>
+<li><strong>Are there other common pairings with pastries?</strong> Maybe <em>tea</em> drinkers are more receptive to half-price pastries than coffee drinkers.</li>
+<li><strong>Should I even bother with pastries?</strong> Maybe sandwiches have more upsell potential&hellip;</li>
+</ul>
+<p>You can see the problem quickly becomes quite complex. And that&rsquo;s just for 4 products we&rsquo;re considering. Imagine a supermarket or online shop with thousands of products!</p>
+<h3 id="rules-based-learning">Rules-based Learning</h3>
+<p>These questions can be answered with a type of Machine Learning called <strong>Rules-based Learning</strong>. In the case where we explore how different events occur together, or products are bought together, we speak of <strong>Association Rules</strong>.</p>
+<p>The aim of the game is to quantify various stats about <em>&lsquo;if A, then B&rsquo;</em> rules such as:</p>
+<blockquote>
+<p><strong>If</strong> a customer buys coffee, <strong>then</strong> they also buy a pastry.</p>
+</blockquote>
+<p>(An important caveat that I will make repeatedly in this article is that the <strong>rules don&rsquo;t imply causality</strong>, only co-occurence. We&rsquo;re not saying that people buy pastries because they have bought a coffee, simply that they arrive at checkout wanting both those things. <a href="https://kalpanileo1996.medium.com/prefix-span-algorithm-with-pyspark-483ab3494373" target="_blank" rel="noopener noreffer ">Other types of rules-based learning</a> focus on <em>sequences</em> of events)</p>
+<p>Before we launch our promo campaign, it would be very valuable to know a few things about the <em>if coffee, then pastry</em> rule. In particular, it would be useful to know:</p>
+<ul>
+<li><strong>How common is this rule?</strong> Am I wasting my energy exploring buying patterns that only one in a million customers buy?</li>
+<li><strong>How certain is this rule?</strong> i.e. Out of the people who do buy coffee, what proportion also buys pastries? If this proportion is already high, than my half-price pastry campaign is going to do more harm than good.</li>
+<li><strong>Are the two items correlated</strong> Does having one item in your basket make a customer more likely, or less likely to also have the other in their basket?</li>
+</ul>
+<p>As we explore Association Rules more, we will refer to these questions as the <em>Support</em> (how common), the <em>Confidence</em> (how certain), and the <em>Lift</em> (how correlated) of the rule and expand on how to calculate and interpret them.</p>
+<p>These metrics allow us to recognise product pairings as:</p>
+<ul>
+<li><strong>complementary</strong>: The products are more likely to be bought together than we would expect from random chance (coffee and cake, tortilla chips and salsa, popcorn and soda)</li>
+<li><strong>or Substitute</strong>: These products are less likely to be bought together. You buy one or the other, but not usually both (Coca Cola and Pepsi, butter and margarine, whole beans and ground coffee)</li>
+</ul>
+<h3 id="less-is-more">Less is more</h3>
+<p>Hunting down rules with high correlations (lift) or high certainty (confidence) can greatly inform promotional campaigns, or how we organise our shop layout. We might for example want to make sure that someone walking towards the coffee aisle happens to walk past the cake section.</p>
+<p>The problem with trying to look for common rules we can be confident in is that the number of possible rules very quickly becomes enormous.</p>
+<blockquote>
+<p>Consider a shop that sells just 10 products.</p>
+<p>The number of <strong>If a customer buys A, Then they also buy B</strong> type rules we could consider is 90. (10 possible products for A, and then 9 remaining for B).</p>
+<p>But we can also consider <strong>If a customer buys A and B, Then they also buy C</strong> type rules, for which we would have 10*9*8 = 720 possibilities.</p>
+<p>Considering even bigger groups, ultimately, there are more than $10!$ (&lsquo;10 factorial&rsquo;, which is 10*9*8*7&hellip;.*1, roughly 3.6 million) possible rules, but the majority of those would be extremely uncommon and not at all worth our time.</p>
+</blockquote>
+<p>A shop with 10 products already has millions of possible rules! A shop with 80 different products would have <strong>more possible rules than there are atoms in the universe,</strong> and the average supermarket sells more than 10,000 different products! We couldn&rsquo;t possibly look at every rule individually. (The fancy term for this behaviour is (Combinatorial Explosion)[https://en.wikipedia.org/wiki/Combinatorial_explosion] and it occurs in many different fields.)</p>
+<hr>
+<p>We need an efficient way to come up with only the interesting rules. Specifically, we ignore combinations of items (itemsets) that are bought very rarely. I&rsquo;m not going to bother setting up a promotional campaign if it will only benefit one in a million customers.</p>
+<p>What we need is a way of finding <strong>frequent itemsets</strong>.</p>
+<h3 id="frequent-itemsets">Frequent Itemsets</h3>
+<p>The first stage in Association Rules mining is to find frequent itemsets. Let&rsquo;s start with what we mean by itemset.</p>
+<blockquote>
+<p>An <strong>itemset</strong> is a group of items (of any size, including a single item) that is present in a transaction (traditionally, a shopping basket).</p>
+</blockquote>
+<p>Consider this purchase in our coffeeshop:</p>
+<a class="lightgallery" href="./itemsets.png" title="./itemsets.png" data-thumbnail="./itemsets.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./itemsets.png"
+            data-srcset="./itemsets.png, ./itemsets.png 1.5x, ./itemsets.png 2x"
+            data-sizes="auto"
+            alt="./itemsets.png" width="580px" height="250px" />
+    </a>
+<p>This order (or &lsquo;basket&rsquo;) contains the following itemsets: <code>{coffee}</code>, <code>{pastry}</code>, <code>{tea}</code>, <code>{coffee, pastry}</code>, <code>{coffee, tea}</code>, <code>{pastry, tea}</code>, <code>{coffee, pastry, tea}</code>.</p>
+<p>Even though coffee wasn&rsquo;t the only thing bought, we can still consider the <code>{coffee}</code> itemset independently. Notice that we don&rsquo;t care about the ordering of the basket, and we don&rsquo;t count multiples of the same product. Referring to sets with curly brackets is a convention from maths and programming.</p>
+<p>So this basket contains 7 itemsets. But are these <em>frequent</em> itemsets? To answer that question, we need receipts. A <strong>lot</strong> of receipts.</p>
+<blockquote>
+<p>To define an itemset as frequent, we need to set some threshold, say 20%. We can then say that if at least 20% of our sales involved coffee, then <code>{coffee}</code> is a frequent itemset. That is, at least one in 5 customers needs to buy a product (or group of products) for that to be considered a frequent itemset.</p>
+</blockquote>
+<p>As a bigger example, consider the following ten orders from our coffeeshop:</p>
+<a class="lightgallery" href="./baskets.png" title="./baskets.png" data-thumbnail="./baskets.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./baskets.png"
+            data-srcset="./baskets.png, ./baskets.png 1.5x, ./baskets.png 2x"
+            data-sizes="auto"
+            alt="./baskets.png" width="580px" height="450px" />
+    </a>
+<p>We sell Coffee, Tea, Pastry, Sandwich, and Juice, and we record whether a customer&rsquo;s order involved one or more of these.</p>
+<p>Firstly, let&rsquo;s only consider itemsets of size 1, that is, individual items.</p>
+<p>Our first step is to count in how many baskets each item features.</p>
+<p>Then, we divide that nr by the total nr of baskets to get the <em>proportion of baskets containing the item</em>. This is the item&rsquo;s support.</p>
+<table>
+<thead>
+<tr>
+<th>Itemset</th>
+<th>nr_baskets</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coffee</td>
+<td>7</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>Tea</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Pastry</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Sandwich</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Juice</td>
+<td>1</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Our next step is to set a support threshold. Let&rsquo;s stick to our 0.2 threshold from before.</p>
+<p>We can see that Coffee, Tea, Pastry, and Sandwich all make the cut, but Juice is not common enough for us to consider. Only one out of ten customers ordered juice.</p>
+<p>Now comes the key idea of the Apriori algorithm:</p>
+<blockquote>
+<p>If an item is rare, then any group of items including it is going to be even more rare.</p>
+<p>Specifically, if an item is so rare it&rsquo;s not worth our while, any bigger group involving the item is also not worth our while.</p>
+</blockquote>
+<p>If juice only occurs in 1 in 10 baskets, then juice with something else will be even less common. (At best it will be equally common, but it can never be more common)</p>
+<p>This is a key insight, because it means that when we start looking for itemsets of size 2, we don&rsquo;t have to bother looking at any pairing that involve juice. Juice already doesn&rsquo;t meet the support threshold, so any group involving juice also won&rsquo;t meet the threshold.</p>
+<p>Let&rsquo;s illustrate the idea with everyone&rsquo;s favourite diagram, the Venn diagram.
+In the below example, the left circle represents all the transactions that involved pastries, and the right circles those transactions that involved juice.</p>
+<p>Some of the transactions (the middle region) are the transactions involving <em>both</em> pastries and juice, but because this region is the overlap between the two circles, it can never be bigger than either circle.</p>
+<a class="lightgallery" href="./subsets.png" title="./subsets.png" data-thumbnail="./subsets.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./subsets.png"
+            data-srcset="./subsets.png, ./subsets.png 1.5x, ./subsets.png 2x"
+            data-sizes="auto"
+            alt="./subsets.png" width="580px" height="250px" />
+    </a>
+<p>In reality, our situation is more like this. The juice circle is already very small, and hence the overlap region is tiny. At best every single juice transaction also involves pastries, and the juice circle would sit fully inside the pastry circle. But if {juice} is already too rare for us to be interested, then {juice and pastry} is guaranteed to also be too rare.</p>
+<a class="lightgallery" href="./subsets_2.png" title="./subsets_2.png" data-thumbnail="./subsets_2.png">
+        <img
+            class="lazyload"
+            src="/DSED/svg/loading.min.svg"
+            data-src="./subsets_2.png"
+            data-srcset="./subsets_2.png, ./subsets_2.png 1.5x, ./subsets_2.png 2x"
+            data-sizes="auto"
+            alt="./subsets_2.png" width="580px" height="250px" />
+    </a>
+<p>In our example, <code>{coffee}</code>, <code>{tea}</code>, <code>{pastry}</code>, and <code>{sandwich}</code> meet the support threshold, and so we will further consider pairs of those: <code>{coffee, tea}</code>, <code>{coffee, pastry}</code>, <code>{coffee, sandwich}</code>, <code>{tea, pastry}</code>, <code>{tea, sandwich}</code>, <code>{pastry, sandwich}</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Itemset</th>
+<th>nr_baskets</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coffee</td>
+<td>7</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>Tea</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Pastry</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Sandwich</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td><del>Juice</del></td>
+<td><del>1</del></td>
+<td><del>0.1</del></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Itemset</th>
+<th>nr_baskets</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coffee, Tea</td>
+<td>2</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>Coffee, Pastry</td>
+<td>4</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Coffee, Sandwich</td>
+<td>1</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>Tea, Pastry</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Tea, Sandwich</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Pastry, Sandwich</td>
+<td>1</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table>
+<p>We got four pairings that met the support threshold: <code>{coffee, tea}</code>, <code>{coffee, pastry}</code>, <code>{tea, pastry}</code>, and <code>{tea, sandwich}</code>.</p>
+<p>We continue combining them, now in sets of three items, but now only have one valid option: <code>{coffee, tea, pastry}</code>.</p>
+<p>How come? <code>{coffee, tea, sandwich}</code> is not a valid option, because we already know that <code>{coffee, sandwich}</code> is not common enough, and so any bigger group involving those also won&rsquo;t make the cut.</p>
+<p>For the same reason, we also don&rsquo;t consider <code>{coffee, pastry, sandwich}</code>, nor <code>{tea, pastry, sandwich}</code> (because pastry and sandwich can&rsquo;t be together).</p>
+<p>This brings our final frequent itemset table to:</p>
+<table>
+<thead>
+<tr>
+<th>Itemset</th>
+<th>nr_baskets</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coffee</td>
+<td>7</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>Tea</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Pastry</td>
+<td>5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Coffee, Pastry</td>
+<td>4</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Sandwich</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Tea, Pastry</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Tea, Sandwich</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Coffee, Tea</td>
+<td>2</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>Coffee, Tea, Pastry</td>
+<td>2</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-06-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/DSED/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/DSED/posts/dijkstra_demo/" class="next" rel="next" title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm">Climbing Mountains: an implementation of Dijkstra's algorithm<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":35},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/DSED/js/theme.min.js"></script></body>
+</html>

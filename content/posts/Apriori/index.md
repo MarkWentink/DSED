@@ -2,7 +2,7 @@
 weight: 3
 title: "Buy a coffee, get a half-price pastry: Intro to Association Rules"
 date: 2023-06-09
-draft: false
+draft: true
 author: "M Wentink"
 authorLink: "https://MarkWentink.github.io/DSED"
 description: "Apriori"

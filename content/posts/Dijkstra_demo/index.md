@@ -1,7 +1,7 @@
 ---
 weight: 2
 title: "Climbing Mountains: an implementation of Dijkstra's algorithm"
-date: 2023-05-24
+date: 2023-05-30
 draft: false
 author: "M Wentink"
 authorLink: ""

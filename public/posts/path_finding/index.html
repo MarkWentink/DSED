@@ -7,17 +7,17 @@
         <title>This is the way: Shortest path-finding with Dijkstra&#39;s algorithm - Data Science Every Day</title><meta name="Description" content="This article introduces Dijkstra&#39;s algorithm, and its use in path-finding."><meta property="og:title" content="This is the way: Shortest path-finding with Dijkstra&#39;s algorithm" />
 <meta property="og:description" content="This article introduces Dijkstra&#39;s algorithm, and its use in path-finding." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://MarkWentink.github.io/DSED/posts/path_finding/" /><meta property="og:image" content="https://MarkWentink.github.io/DSED/posts/path_finding/intro_maze.jpg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://dsed.uk/posts/path_finding/" /><meta property="og:image" content="https://dsed.uk/posts/path_finding/intro_maze.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-25T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-06-09T10:40:33+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta property="article:modified_time" content="2023-08-30T15:56:47+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://MarkWentink.github.io/DSED/posts/path_finding/intro_maze.jpg"/>
+<meta name="twitter:image" content="https://dsed.uk/posts/path_finding/intro_maze.jpg"/>
 <meta name="twitter:title" content="This is the way: Shortest path-finding with Dijkstra&#39;s algorithm"/>
 <meta name="twitter:description" content="This article introduces Dijkstra&#39;s algorithm, and its use in path-finding."/>
 <meta name="application-name" content="Data Science Every Day">
 <meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://MarkWentink.github.io/DSED/posts/path_finding/" /><link rel="prev" href="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" /><link rel="stylesheet" href="/DSED/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dsed.uk/posts/path_finding/" /><link rel="prev" href="https://dsed.uk/posts/dijkstra_demo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,14 +27,14 @@
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/"
+            "@id": "https:\/\/dsed.uk\/posts\/path_finding\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/intro_maze.jpg",
+                            "url": "https:\/\/dsed.uk\/posts\/path_finding\/intro_maze.jpg",
                             "width":  1854 ,
                             "height":  1300 
                         }],"genre": "posts","wordcount":  2069 ,
-        "url": "https:\/\/MarkWentink.github.io\/DSED\/posts\/path_finding\/","datePublished": "2023-05-25T00:00:00+00:00","dateModified": "2023-06-09T10:40:33+01:00","publisher": {
+        "url": "https:\/\/dsed.uk\/posts\/path_finding\/","datePublished": "2023-05-25T00:00:00+00:00","dateModified": "2023-08-30T15:56:47+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -47,7 +47,7 @@
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+            <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
         </div>
         <div class="menu">
             <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
@@ -59,7 +59,7 @@
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/DSED/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+                <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -76,11 +76,11 @@
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
-        src="/DSED/svg/loading.min.svg"
-        data-src="/DSED/posts/path_finding/intro_maze.jpg"
-        data-srcset="/DSED/posts/path_finding/intro_maze.jpg, /DSED/posts/path_finding/intro_maze.jpg 1.5x, /DSED/posts/path_finding/intro_maze.jpg 2x"
+        src="/svg/loading.min.svg"
+        data-src="/posts/path_finding/intro_maze.jpg"
+        data-srcset="/posts/path_finding/intro_maze.jpg, /posts/path_finding/intro_maze.jpg 1.5x, /posts/path_finding/intro_maze.jpg 2x"
         data-sizes="auto"
-        alt="/DSED/posts/path_finding/intro_maze.jpg"
+        alt="/posts/path_finding/intro_maze.jpg"
         title="This article introduces Dijkstra&#39;s algorithm, and its use in path-finding." /></div><div class="content" id="content"><p>You wake up from a crazy evening at a Data Science conference in the middle of a cornfield maze. You look to your left, and see corn. To your right, corn. You have no idea how you got here, nor how to get back to civilisation in time for the rest of the conference!</p>
 <p>Fortunately, you are good at thinking on your feet.</p>
 <blockquote>
@@ -98,7 +98,7 @@
 <p>The images below demonstrates the strategy. We start from the green dot, put our right hand on the wall, never let go, and follow it all the way to the exit. Depending on where we start in the maze, this can take us on quite a winding path, even in a simple maze.</p>
 <p><img
         class="lazyload"
-        src="/DSED/svg/loading.min.svg"
+        src="/svg/loading.min.svg"
         data-src="./right_hand_good.png"
         data-srcset="./right_hand_good.png, ./right_hand_good.png 1.5x, ./right_hand_good.png 2x"
         data-sizes="auto"
@@ -109,7 +109,7 @@
 <a class="lightgallery" href="./right_hand_bad.png" title="./right_hand_bad.png" data-thumbnail="./right_hand_bad.png">
         <img
             class="lazyload"
-            src="/DSED/svg/loading.min.svg"
+            src="/svg/loading.min.svg"
             data-src="./right_hand_bad.png"
             data-srcset="./right_hand_bad.png, ./right_hand_bad.png 1.5x, ./right_hand_bad.png 2x"
             data-sizes="auto"
@@ -141,7 +141,7 @@
 <p>Note, at this point, we no longer have any concept of the actual shape of the maze, only the intersections we can travel through, and the distances between them.</p>
 <p><img
         class="lazyload"
-        src="/DSED/svg/loading.min.svg"
+        src="/svg/loading.min.svg"
         data-src="./maze_to_graph_1.png"
         data-srcset="./maze_to_graph_1.png, ./maze_to_graph_1.png 1.5x, ./maze_to_graph_1.png 2x"
         data-sizes="auto"
@@ -149,7 +149,7 @@
         title="./maze_to_graph_1.png" /></p>
 <p><img
         class="lazyload"
-        src="/DSED/svg/loading.min.svg"
+        src="/svg/loading.min.svg"
         data-src="./maze_to_graph_2.png"
         data-srcset="./maze_to_graph_2.png, ./maze_to_graph_2.png 1.5x, ./maze_to_graph_2.png 2x"
         data-sizes="auto"
@@ -171,7 +171,7 @@
 <a class="lightgallery" href="./Dijkstra.png" title="./Dijkstra.png" data-thumbnail="./Dijkstra.png">
         <img
             class="lazyload"
-            src="/DSED/svg/loading.min.svg"
+            src="/svg/loading.min.svg"
             data-src="./Dijkstra.png"
             data-srcset="./Dijkstra.png, ./Dijkstra.png 1.5x, ./Dijkstra.png 2x"
             data-sizes="auto"
@@ -193,7 +193,7 @@
 <a class="lightgallery" href="./Dijkstra_full_run.gif" title="./Dijkstra_full_run.gif" data-thumbnail="./Dijkstra_full_run.gif">
         <img
             class="lazyload"
-            src="/DSED/svg/loading.min.svg"
+            src="/svg/loading.min.svg"
             data-src="./Dijkstra_full_run.gif"
             data-srcset="./Dijkstra_full_run.gif, ./Dijkstra_full_run.gif 1.5x, ./Dijkstra_full_run.gif 2x"
             data-sizes="auto"
@@ -211,7 +211,7 @@
 <a class="lightgallery" href="./walkthrough_1.png" title="./walkthrough_1.png" data-thumbnail="./walkthrough_1.png">
         <img
             class="lazyload"
-            src="/DSED/svg/loading.min.svg"
+            src="/svg/loading.min.svg"
             data-src="./walkthrough_1.png"
             data-srcset="./walkthrough_1.png, ./walkthrough_1.png 1.5x, ./walkthrough_1.png 2x"
             data-sizes="auto"
@@ -227,7 +227,7 @@
 <a class="lightgallery" href="./special_cases.png" title="./special_cases.png" data-thumbnail="./special_cases.png">
         <img
             class="lazyload"
-            src="/DSED/svg/loading.min.svg"
+            src="/svg/loading.min.svg"
             data-src="./special_cases.png"
             data-srcset="./special_cases.png, ./special_cases.png 1.5x, ./special_cases.png 2x"
             data-sizes="auto"
@@ -254,7 +254,7 @@
 <li>Repeat steps 3-7 until the target node has been processed.</li>
 </ol>
 </blockquote>
-<p>To explore the code implementation in a bit more detail, I have taken an example from one of my favourite coding challenges, Advent of Code. You can read about it in <a href="https://MarkWentink.github.io/DSED/posts/dijkstra_demo/" rel="">Climbing Mountains</a></p>
+<p>To explore the code implementation in a bit more detail, I have taken an example from one of my favourite coding challenges, Advent of Code. You can read about it in <a href="https://dsed.uk/posts/dijkstra_demo/" rel="">Climbing Mountains</a></p>
 <h3 id="a-note-on-time-complexity">A note on Time Complexity</h3>
 <p>A question we should ask ourselves if we plan to roll out any solution at scale, is how long it takes to run, and how much slower it gets on bigger datasets (mazes). In this simple implementation of the algorithm, we need to process every node once, and for each node, we need to consider all its neighbours. For our maze, that means we need to do up to $4* nodes$ checks.</p>
 <p>Generally, when calculating time complexities, we consider the worst case scenario. In the general version of Dijkstra&rsquo;s algorithm, the worst case scenario is when every node is connected to every other node. That way, for $V$ nodes (v for vertex), we need to check $V-1$ neighbours. So, as the nr of nodes goes up, our processing time goes up by $V*(V-1)$ which we approximate as $(V^2)$. As we double the nr of nodes, processing time goes up x4.</p>
@@ -264,8 +264,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-06-09&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/77d605f5fbbdc5b2fcda6e10c25b7c52d093c576" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 77d605f5fbbdc5b2fcda6e10c25b7c52d093c576: Dijkstra final touch">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>77d605f</a></span>
+                <span>Updated on 2023-08-30&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/27cf60a481ea1c1d10efb3af9578b67e96b2447e" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 27cf60a481ea1c1d10efb3af9578b67e96b2447e: see what happens">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>27cf60a</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -278,11 +278,11 @@
     <div class="post-info-more">
         <section class="post-tags"></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/DSED/">Home</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/DSED/posts/dijkstra_demo/" class="prev" rel="prev" title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Climbing Mountains: an implementation of Dijkstra's algorithm</a></div>
+    <div class="post-nav"><a href="/posts/dijkstra_demo/" class="prev" rel="prev" title="Climbing Mountains: an implementation of Dijkstra&#39;s algorithm"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Climbing Mountains: an implementation of Dijkstra's algorithm</a></div>
 </div>
 </article></div>
             </main></div>
@@ -292,5 +292,8 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":35},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/DSED/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":35},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-FV5Q1QPFWK', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-FV5Q1QPFWK" async></script></body>
 </html>

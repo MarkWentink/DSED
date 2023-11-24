@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 4
 title: "This is the way: Shortest path-finding with Dijkstra's algorithm"
 date: 2023-05-25
 draft: false

@@ -1,11 +1,11 @@
 ---
-weight: 4
+weight: 1
 title: "Rucksack Re-org: Advent of Code Throwback 1, String Parsing"
 date: 2023-11-24
 draft: false
 author: "M Wentink"
 authorLink: "https://MarkWentink.github.io/DSED"
-summary: "TBC"
+summary: "In this Advent of Code challenges, we introduce some simple string parsing and checking with sets, and prepare some ready-made function that we may be able to re-use in later challenges. "
 images: []
 resources:
 - name: featured-image
@@ -235,4 +235,4 @@ Another day, another coding challenge.
 
 -------
 
-Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on [LinkedIn](https://www.linkedin.com/in/mark-wentink-793217116/)
+Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on [LinkedIn](https://www.linkedin.com/in/mark-wentink-793217116/).

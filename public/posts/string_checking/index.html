@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rucksack Re-org: Advent of Code Throwback 1, String Parsing - Data Science Every Day</title><meta name="Description" content="Hypotheses, Hyperparameters, Headaches"><meta property="og:title" content="Rucksack Re-org: Advent of Code Throwback 1, String Parsing" />
+<meta property="og:description" content="TBC" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dsed.uk/posts/string_checking/" /><meta property="og:image" content="https://dsed.uk/posts/string_checking/andrew-neel-backpack.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-24T00:00:00+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dsed.uk/posts/string_checking/andrew-neel-backpack.jpg"/>
+<meta name="twitter:title" content="Rucksack Re-org: Advent of Code Throwback 1, String Parsing"/>
+<meta name="twitter:description" content="TBC"/>
+<meta name="application-name" content="Data Science Every Day">
+<meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dsed.uk/posts/string_checking/" /><link rel="next" href="https://dsed.uk/posts/apriori/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rucksack Re-org: Advent of Code Throwback 1, String Parsing",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dsed.uk\/posts\/string_checking\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dsed.uk\/posts\/string_checking\/andrew-neel-backpack.jpg",
+                            "width":  1723 ,
+                            "height":  1149 
+                        }],"genre": "posts","wordcount":  1431 ,
+        "url": "https:\/\/dsed.uk\/posts\/string_checking\/","datePublished": "2023-11-24T00:00:00+00:00","dateModified": "2023-11-24T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "M Wentink"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rucksack Re-org: Advent of Code Throwback 1, String Parsing</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1431 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/string_checking/andrew-neel-backpack.jpg"
+        data-srcset="/posts/string_checking/andrew-neel-backpack.jpg, /posts/string_checking/andrew-neel-backpack.jpg 1.5x, /posts/string_checking/andrew-neel-backpack.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/string_checking/andrew-neel-backpack.jpg"
+        title="/posts/string_checking/andrew-neel-backpack.jpg" /></div><div class="content" id="content"><h1 id="the-most-wonderful-time-of-the-year">The most wonderful time of the year</h1>
+<p>One week from now, on December 1st, is the moment we have all been waiting for! No, it is not the first day Mariah Carey is back on the radio, that was straight after Halloween. It&rsquo;s <a href="https://adventofcode.com/" target="_blank" rel="noopener noreffer ">Advent of Code</a> time! A series of daily coding challenges in December that can be solved in any language. I will code in Python throughout these posts.</p>
+<p>In anticipation of all this excitement, I&rsquo;m revisiting some of last year&rsquo;s problems, to give you a flavour of what the challenges involve, and hopefully to get you coding!</p>
+<p>First up: <strong>AoC 2022 day 3</strong></p>
+<h1 id="rucksack-reorganisation">Rucksack reorganisation</h1>
+<p>Advent of Code challenges tend to have somewhat convoluted storylines, so let&rsquo;s first dig into the text to see what we are actually being asked to do. Rather than copying the lengthy description, I will link to the website and paraphrase:</p>
+<p><a href="https://adventofcode.com/2022/day/3" target="_blank" rel="noopener noreffer ">AoC 2022 Day 3</a> is a string parsing problem. We are told that our problem input is a list of text strings representing rucksack contents. Each letter (case sensitive) in the string represents some item. We are further told that rucksacks have two compartments of equal size, so the string can be split in half to represent the contents of each compartment. Crucially, items of the same type (i.e. the same character) are supposed to go in the same compartment, but each rucksack has one mistake. We need to identify which item in each rucksack does not follow the rule (i.e. which item features in both halves of the string) and score the bad items following the rule: a-z becomes 1-26, A-Z becomes 27-52.</p>
+<p>Let&rsquo;s look at an example and then summarise the rules:</p>
+<blockquote>
+<p>One example entry is as follows:</p>
+<p><code>vJrwpWtwJgWrhcsFMMfFFhFp</code></p>
+<p>The two compartments (halves) of this rucksack are <code>vJrwpWtwJgWr</code> and <code>hcsFMMfFFhFp</code>. The &lsquo;bad&rsquo; item, i.e. the only one that appears in both compartments, is <code>p</code>, which corresponds to number <code>16</code>. Hence this rucksack gets a score of <code>16</code>, which will be summed to the others for the final answer.</p>
+</blockquote>
+<h4 id="rule-summary">Rule summary</h4>
+<ul>
+<li>Each rucksack is given as a string of characters representing items. We can have multiple of the same item in a rucksack.</li>
+<li>Each rucksack contains two compartments, the two halves of the string.</li>
+<li>Each rucksack will have one item type (one character) that appears in both compartments</li>
+<li>We need to identify this character, convert it into a score <code>a-z --&gt; 1-26</code> and <code>A-Z --&gt; 27-52</code>.</li>
+<li>The answer is the sum of the scores across all rucksacks.</li>
+</ul>
+<h1 id="lets-get-coding">Let&rsquo;s get coding</h1>
+<p>Establishing the rules of the game is half the work. We know we&rsquo;re going to need to be able to read in strings, check them for specific characters, and convert characters into scores.</p>
+<p>Each of these tasks should lend themselves nicely to a function.</p>
+<h4 id="the-plan">The plan</h4>
+<p>It often helps to write out the overall program first, abstracting away the details as function names for you to worry about later. I usually do this in plain english code comments first (also known as pseudo-code), and then will in the corresponding python code.</p>
+<p>For us, our program will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">day_3</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># load in the puzzle input as a list from the specified file path</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># prep a list to keep track of scores</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># loop through the puzzle input</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">rucksack</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1"># identify the bad item</span>
+</span></span><span class="line"><span class="cl">      <span class="n">bad_item</span> <span class="o">=</span> <span class="n">find_bad_item</span><span class="p">(</span><span class="n">rucksack</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1"># calculate its score</span>
+</span></span><span class="line"><span class="cl">      <span class="n">score</span> <span class="o">=</span> <span class="n">score_item</span><span class="p">(</span><span class="n">bad_item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1"># save the score</span>
+</span></span><span class="line"><span class="cl">      <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># sum all scores to answer the challenge</span>
+</span></span><span class="line"><span class="cl">    <span class="n">answer</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">answer</span>
+</span></span></code></pre></div><p>That wasn&rsquo;t so bad! Now, small detail: we don&rsquo;t have any of those functions yet! Let&rsquo;s get cracking on those <code>load_data()</code>, <code>find_bad_item()</code> and <code>score_item()</code> functions.</p>
+<h4 id="data-loading">Data loading</h4>
+<p>Let&rsquo;s start with a function for loading in the input data, which is given as a .txt file. It&rsquo;s a good idea to standardise this function as much as possible, as we will be using it pretty much every day during AoC.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Parses a .txt file from &#39;path&#39;, and appends each line as an entry to a list. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Input: .txt file 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Output: list of lines
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">data</span>
+</span></span></code></pre></div><p>The function accesses a specified filepath and reads the file with the built-in <code>open()</code> function. <code>.readlines()</code> is an iterable object, giving us the lines of the file one by one. In this problem, the lines don&rsquo;t really need any preprocessing, so I&rsquo;m just stripping off any possible whitespace with <code>.strip()</code>. The whole thing is wrapped in a list comprehension to return a list of cleaned strings.</p>
+<p>Remember the list comprehension is equivalent (but runs faster) to a for loop:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span></span></code></pre></div><p>Out comes <code>data</code>, which looks something like this:</p>
+<pre tabindex="0"><code>[&#39;WwcsbsWwspmFTGVV&#39;,
+ &#39;RHtMDHdSMnDBGMSDvnvDjtmpTpjTFggpmjmTFggTjmpP&#39;,
+ &#39;vtCSGRMBDzHddvBHBzRhrlcZhlLzWNlqblhzcr&#39;,
+ &#39;shhszHNHHZWqSzVNdClMjlFjBBbNTB&#39;,
+    ......]
+</code></pre><p>Not particularly nice to look at, but easy enough for a program to iterate through and do some work on.</p>
+<p>Next up, we need a function that can identify the &lsquo;bad&rsquo; item in each rucksack.</p>
+<h4 id="finding-bad-items">Finding bad items</h4>
+<p>Now that we have our input, we can work through it in a for loop. For each rucksack, we need to find which character appears in both halves.</p>
+<p>There is a quick trick here if you know about <a href="https://www.w3schools.com/python/python_sets.asp" target="_blank" rel="noopener noreffer ">sets</a>. A set is a list of unique values, and sets come with two particularly useful functions: <code>union</code> and <code>intersection</code>. <code>intersection()</code> returns only those items that appear in both sets, which is exactly what we want here!</p>
+<p>All we need to do is split our rucksack into two halves, create a set of unique values from each half, and use intersection() to identify the character that both sets have in common.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">find_bad_item</span><span class="p">(</span><span class="n">rucksack</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Figure out where to split the halves</span>
+</span></span><span class="line"><span class="cl">  <span class="n">midpoint</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rucksack</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Separate the halves</span>
+</span></span><span class="line"><span class="cl">  <span class="n">half_1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rucksack</span><span class="p">[:</span><span class="n">midpoint</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="n">half_2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rucksack</span><span class="p">[</span><span class="n">midpoint</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Look for characters that appear in both halves. This returns a set.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">shared_items</span> <span class="o">=</span> <span class="n">half_1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">half_2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># There should be only one. We can extract it from the set if we turn it back into a list.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bad_item</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">shared_items</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">bad_item</span>
+</span></span></code></pre></div><p>To make our code more robust against weird scenarios, it could be good to put in some safeguards.</p>
+<p>Fortunately, in this problem, we are advised that rucksacks are always of even length, so we don&rsquo;t have to worry about having halves of unequal length.</p>
+<p>However, accidents happen: what if there is a typo in the puzzle input, and I end up with a rucksack that has no overlapping, or multiple overlapping items?</p>
+<p>We can account for this with something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.....</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shared_items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bad_item</span> <span class="o">=</span> <span class="n">shared_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error: unexpected number of shared items&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.....</span>
+</span></span></code></pre></div><p>equivalently, we can use an <code>assert</code> statement to throw an actual error:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">.....</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shared_items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;Unexpected number of shared items&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">.....</span>
+</span></span></code></pre></div><p>Upon running, a bad rucksack would trigger the following Python error:</p>
+<p><code>AssertionError: Unexpected number of shared items</code>.</p>
+<p>It&rsquo;s always good to think about what could go wrong with the usuer input or with unexpected data, and try to account for that as much as possible.</p>
+<p>Lastly, we need a function that can convert the identified items into scores.</p>
+<h4 id="scoring">Scoring</h4>
+<p>For this, we can use the <code>ord()</code> function, which converts a character into its <a href="https://www.asciitable.com/" target="_blank" rel="noopener noreffer ">ASCII code</a>. All uppercase, and lowercase letters, have consecutive ASCII codes.</p>
+<p>We just need to account for the fact that we start from code <code>65</code> for <code>A</code>, which is supposed to be <code>27</code> so we need to subtract <code>38</code> from all uppercase scores.</p>
+<p>The lowercase alphabet is even further down the list, and starts from <code>97</code> for <code>a</code>, so we will subtract <code>96</code> from these.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">score_item</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Takes in a single character, and returns its score leveraging its ASCII value. 
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Input: item: a single character as string
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Output: value: its score as an int
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span><span class="mi">91</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">value</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">-</span><span class="mi">38</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">value</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">-</span><span class="mi">96</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">value</span>
+</span></span></code></pre></div><p>This now let&rsquo;s us calculate the score for a single backpack. We&rsquo;ll just need to keep track of these scores in a list so we can sum them together later. Alternatively, we can add them to sum running tally.</p>
+<h4 id="putting-it-all-together">Putting it all together</h4>
+<p>Now, all that&rsquo;s left is to put everything together into one python file or notebook, run <code>day_3(file_path)</code>, and out comes the magical number.</p>
+<p>You submit your answer onto the webpage, and are rewarded with a beautiful gold star! &hellip; and part 2 of the challenge&hellip;.</p>
+<p>Another day, another coding challenge.</p>
+<hr>
+<p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/apriori/" class="next" rel="next" title="Coffee and Cake, a match made in heaven: Intro to Association Rules">Coffee and Cake, a match made in heaven: Intro to Association Rules<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":35},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-FV5Q1QPFWK', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-FV5Q1QPFWK" async></script></body>
+</html>

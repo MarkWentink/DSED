@@ -83,6 +83,7 @@ class CPU():
         self.register = 1
         self.clock = 1
         self.signal_strength = 0
+        return
     
     
     # triggering a noop instruction should increment the internal clock of the cpu
@@ -125,6 +126,7 @@ Let's break that up a bit:
         self.register = 1
         self.clock = 1
         self.signal_strength = 0
+        return
 ```
 
 A class definition always needs an `__init__()` method. This specifies the pieces of info that need to be assigned when a copy of the template is requested ('instantiated'). 

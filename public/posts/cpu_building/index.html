@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming - Data Science Every Day</title><meta name="Description" content="Hypotheses, Hyperparameters, Headaches"><meta property="og:title" content="A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming" />
+<meta property="og:description" content="In this Advent of Code challenges, we take an object-orientated approach to programming a very simple CPU." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dsed.uk/posts/cpu_building/" /><meta property="og:image" content="https://dsed.uk/posts/cpu_building/cpu.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-24T00:00:00+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dsed.uk/posts/cpu_building/cpu.jpg"/>
+<meta name="twitter:title" content="A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming"/>
+<meta name="twitter:description" content="In this Advent of Code challenges, we take an object-orientated approach to programming a very simple CPU."/>
+<meta name="application-name" content="Data Science Every Day">
+<meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dsed.uk/posts/cpu_building/" /><link rel="prev" href="https://dsed.uk/posts/string_checking/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dsed.uk\/posts\/cpu_building\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dsed.uk\/posts\/cpu_building\/cpu.jpg",
+                            "width":  1531 ,
+                            "height":  861 
+                        }],"genre": "posts","wordcount":  1527 ,
+        "url": "https:\/\/dsed.uk\/posts\/cpu_building\/","datePublished": "2023-11-24T00:00:00+00:00","dateModified": "2023-11-24T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "M Wentink"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1527 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/cpu_building/cpu.jpg"
+        data-srcset="/posts/cpu_building/cpu.jpg, /posts/cpu_building/cpu.jpg 1.5x, /posts/cpu_building/cpu.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/cpu_building/cpu.jpg"
+        title="/posts/cpu_building/cpu.jpg" /></div><div class="content" id="content"><h1 id="the-most-wonderful-time-of-the-year">The most wonderful time of the year</h1>
+<p>It&rsquo;s almost December again, which means it&rsquo;s <a href="https://adventofcode.com/" target="_blank" rel="noopener noreffer ">Advent of Code</a> time! AoC (not the US House Representative) is a series of daily coding challenges in December that can be solved in any language. I will code in Python throughout these posts.</p>
+<p>In anticipation of all this excitement, I&rsquo;m revisiting some of last year&rsquo;s problems, to give you a flavour of what the challenges involve, and hopefully to get you coding!</p>
+<p>Introducing: <strong>AoC 2022 day 10</strong></p>
+<h1 id="the-challenge">The challenge</h1>
+<p>As before, our first challenge is to extract the actual objective from the story, which fortunately for us, is a bit more to the point this time.</p>
+<p><a href="https://adventofcode.com/2022/day/10" target="_blank" rel="noopener noreffer ">AoC 2022 Day 10</a> asks us to program a very basic CPU: it has</p>
+<ul>
+<li>a <code>clock</code> that counts up and keeps track of what cycle we&rsquo;re on,</li>
+<li>a single <code>register</code> to store a number in,</li>
+<li>and our CPU can execute a grand total of two operations:
+<ul>
+<li><code>noop</code>, which does nothing for one cycle, and</li>
+<li><code>addx</code> which takes two cycles to complete and adds a number to our register.</li>
+</ul>
+</li>
+</ul>
+<p>Our job is to run a series of instructions (lines of the puzzle input, either <code>noop</code> or <code>addx</code>) while periodically checking the value of the <code>register</code> and summing those values together into a <code>signal_strength</code>.</p>
+<p>(Btw, if you want to know more about how your computer&rsquo;s CPU works, <a href="https://www.youtube.com/watch?v=FZGugFqdr60" target="_blank" rel="noopener noreffer ">CrashCourse Computer Science</a> has an excellent video on it!)</p>
+<h4 id="rule-summary">Rule summary</h4>
+<ul>
+<li>Instructions are fed in the format <code>'noop'</code> or <code>'addx [nr]'</code>.</li>
+<li>The clock (starting at 1) counts cycles: +1 for a <code>noop</code> and +2 for a <code>addx</code>.</li>
+<li><code>noop</code> does nothing, i.e. the cpu just waits for one cycle.</li>
+<li><code>addx</code> changes the value of <code>register</code>, which starts at 1.</li>
+<li>On the 20th, 60th, 100th, 140th, 180th, and 220th cycle, we need to check the <code>register</code> value, multiply that to the <code>clock</code> value, and add the product to the running sum <code>signal_strength</code>.</li>
+<li>The answer is the total of <code>signal_strength</code>.</li>
+</ul>
+<h1 id="lets-get-coding">Let&rsquo;s get coding</h1>
+<h4 id="the-plan">The plan</h4>
+<p>Because this challenge revolves around a central concept (the CPU), this is an ideal situation for some Object-Oriented Programming.</p>
+<p>We will create a <code>CPU</code> class, which has a clock and register attribute, and which can run operations as methods.</p>
+<p>Once we have the class, we will use our <code>load_data()</code> function from <a href="https://dsed.uk/posts/string_checking/" rel="">before</a> to read in the puzzle input, save that as a list of instructions, and work our way through the list.</p>
+<h4 id="keep-it-classy">Keep it classy</h4>
+<p>As the centre piece for our program, we will create the <code>CPU</code> class. In object-oriented programming, classes are king. They get their own attributes (pieces of info about them), and methods (things they can do).</p>
+<p>Classes are like blueprints, or templates. To use it, we create an &lsquo;instance&rsquo; of the class, a copy, and that copy inherits all the properties of the template.</p>
+<p>Let&rsquo;s create our class, and then zoom in on some specific pieces.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CPU</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Every class must have an __init__ method. </span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># This defines what happens when the variable is first created. </span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># In our case, the cpu gets three &#39;attributes&#39;, with pre-set values. </span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># triggering a noop instruction should increment the internal clock of the cpu</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># It should then test whether a cycle 20, 60, 100, ... is reached.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Triggering an add instruction should update the clock as well as the register.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># We also need to test whether a signal cycle is reached after each increment</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">addx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">increment</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Note the register is only updated after the second cycle increment.</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">+=</span> <span class="n">increment</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Our test method checks whether the clock has reached a signal cycle (20, 60, 100, ...)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># If so, it calculates the signal strength and adds that to the running total. </span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">%</span> <span class="mi">40</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">register</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> 
+</span></span></code></pre></div><p>Woosh, that&rsquo;s quite the chunk!</p>
+<p>Let&rsquo;s break that up a bit:</p>
+<h4 id="the-__init__-method">The <code>__init__</code> method</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span></code></pre></div><p>A class definition always needs an <code>__init__()</code> method. This specifies the pieces of info that need to be assigned when a copy of the template is requested (&lsquo;instantiated&rsquo;).</p>
+<p>We can make the copy by just treating the class as a function and assigned the output to a variable: <code>my_cpu = CPU()</code></p>
+<p>We would then have three variables, <code>my_cpu.clock</code>, <code>my_cpu.register</code>, and <code>my_cpu.signal_strength</code>, all with pre-set values.</p>
+<p>Don&rsquo;t worry too much about the whole <code>self.something</code> syntax in the definition. This is a way for our class to refer to information about itself.</p>
+<p>Ok, at this point, we have a cpu with some pieces of info, but it doesn&rsquo;t do anything yet. Our CPU needs to be able to do three things: deal with <code>noop</code> instructions, deal with <code>addx</code> instructions, and check whether the clock is on a signal cycle (20, 60, 100, 140, 180, 220).</p>
+<p>Let&rsquo;s make that happen:</p>
+<h4 id="noop">Noop()</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span></code></pre></div><p>The only thing a <code>noop()</code> instruction does is let the clock tick. This essentially corresponds to a &lsquo;wait&rsquo; or &lsquo;hold&rsquo; command to the cpu.</p>
+<p>At the end of every instruction, we want to check whether we&rsquo;re on a signal cycle. We&rsquo;ll come to <code>test()</code> in a moment.</p>
+<p>(Again, class methods always take <code>self</code> as an input, and all the attributes are referred to as <code>self.something</code>. Without the self, you get class attributes, which are a story for another time.)</p>
+<h4 id="addx">addx()</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">addx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">increment</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">+=</span> <span class="n">increment</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span></code></pre></div><p><code>addx</code> takes two cycles to complete, so the clock gets incremented twice.</p>
+<p>After the first increment, nothing has changed yet, but we still need to check whether we landed on a signal cycle.</p>
+<p>After the second increment, the register is updated by adding the value that&rsquo;s part of the instruction. We then check again for a signal cycle.</p>
+<blockquote>
+<p>One beautiful thing about classes is that although all these methods might seem like indepedent functions, they all share an awareness of the self. attributes. This means that we often don&rsquo;t need to return anything at the end of a method. The attributes are automatically updated.</p>
+</blockquote>
+<h4 id="lastly-our-test">Lastly, our test()</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">%</span> <span class="mi">40</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">register</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> 
+</span></span></code></pre></div><p><code>test()</code> should only trigger on cycles 20, 60, 100, 140, 180, and 220. A nice shorthand for this list uses the modulus function, and the fact that these points are 40 cycles apart. If the remainder of clock divided by 40 is 20, then we&rsquo;re on a signal cycle.</p>
+<p>In that case, we need to multiply the clock value with the register value, and add the result to a running total, <code>signal_strength</code>.</p>
+<h4 id="putting-it-all-together">Putting it all together</h4>
+<p>Now that we have our <code>CPU()</code> class, all we need is a <code>load_data()</code> function and a tiny bit of code.</p>
+<p>I&rsquo;m reusing the same <code>load_data()</code> function as for the previous challenge, with the addition of a <code>.split()</code> to separate the <code>addx</code> command from the integer value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">data</span>
+</span></span></code></pre></div><p>This returns the puzzle input as a list of instructions. Here are the first five:</p>
+<p><code>[['addx', '1'], ['noop'], ['addx', '4'], ['noop'], ['noop']]</code></p>
+<p>Note <code>noop</code> instructions come by themselves, while <code>addx</code> instructions come with an integer value.</p>
+<p>Our actual program then looks like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Pull in the data</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Ask for a copy of the CPU template</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_cpu</span> <span class="o">=</span> <span class="n">CPU</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Loop through the instructions</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1"># First check that we haven&#39;t reached cycle 220 yet.</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># If we have, interrupt and stop the loop. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">cpu</span><span class="o">.</span><span class="n">clock</span> <span class="o">&gt;=</span> <span class="mi">221</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Depending on the command, route to the noop() method or the addx() method</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;noop&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">my_cpu</span><span class="o">.</span><span class="n">noop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># we need to convert the input from string to integer before passing it to the method.        </span>
+</span></span><span class="line"><span class="cl">  <span class="k">elif</span> <span class="n">instruction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;addx&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">my_cpu</span><span class="o">.</span><span class="n">addx</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">instruction</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># as a safeguard, we&#39;ll build in an error message for any odd instructions.        </span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error: instruction not recognised&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># At the end of the loop, we simply print out our total signal strength as answer</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">my_cpu</span><span class="o">.</span><span class="n">signal_strength</span><span class="p">)</span>
+</span></span></code></pre></div><p>After all that comes rolling out the answer: <code>11820</code> in my case. This will be different for everyone though, as AoC generates unique puzzle input for every participant. Again, we are rewarded with a bright gold star, and access to the second half of the problem&hellip;</p>
+<h4 id="wrap-up">Wrap up</h4>
+<p>If Object Oriented Programming is new to you, don&rsquo;t let that put you off! Of course, you could solve this challenge just fine with normal functions, but often these challenges are good opportunities to try something new. You could even challenge yourself to tackle a whole year in a language that&rsquo;s new to you!</p>
+<p>If you want to explore OOP more, I recommend the <a href="https://www.w3schools.com/python/python_classes.asp" target="_blank" rel="noopener noreffer ">W3School page</a> on the topic, which does an excellent job of explaining the topic from scratch.</p>
+<p>See you next time!</p>
+<hr>
+<p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a>.</p>
+<hr>
+<p>Photo Credit: Harrison Broadbent, Unsplash</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/string_checking/" class="prev" rel="prev" title="Rucksack Re-org: Advent of Code Throwback 1, String Parsing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rucksack Re-org: Advent of Code Throwback 1, String Parsing</a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":60},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-FV5Q1QPFWK', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-FV5Q1QPFWK" async></script></body>
+</html>

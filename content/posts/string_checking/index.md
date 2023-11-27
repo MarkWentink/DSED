@@ -236,3 +236,7 @@ Another day, another coding challenge.
 -------
 
 Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on [LinkedIn](https://www.linkedin.com/in/mark-wentink-793217116/).
+
+-------
+
+Photo Credit: Andrew Neel, Unsplash

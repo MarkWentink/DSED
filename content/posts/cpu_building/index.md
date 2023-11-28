@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: "A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming"
+title: "A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming"
 date: 2023-11-24
 draft: false
 author: "M Wentink"

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming - Data Science Every Day</title><meta name="Description" content="Hypotheses, Hyperparameters, Headaches"><meta property="og:title" content="A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming" />
+        <title>A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming - Data Science Every Day</title><meta name="Description" content="Hypotheses, Hyperparameters, Headaches"><meta property="og:title" content="A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming" />
 <meta property="og:description" content="In this Advent of Code challenges, we take an object-orientated approach to programming a very simple CPU." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dsed.uk/posts/cpu_building/" /><meta property="og:image" content="https://dsed.uk/posts/cpu_building/cpu.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-24T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-11-24T00:00:00+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta property="article:modified_time" content="2023-11-27T17:25:24+00:00" /><meta property="og:site_name" content="Data Science Every Day" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://dsed.uk/posts/cpu_building/cpu.jpg"/>
-<meta name="twitter:title" content="A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming"/>
+<meta name="twitter:title" content="A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming"/>
 <meta name="twitter:description" content="In this Advent of Code challenges, we take an object-orientated approach to programming a very simple CPU."/>
 <meta name="application-name" content="Data Science Every Day">
 <meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming",
+        "headline": "A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -33,8 +33,8 @@
                             "url": "https:\/\/dsed.uk\/posts\/cpu_building\/cpu.jpg",
                             "width":  1531 ,
                             "height":  861 
-                        }],"genre": "posts","wordcount":  1527 ,
-        "url": "https:\/\/dsed.uk\/posts\/cpu_building\/","datePublished": "2023-11-24T00:00:00+00:00","dateModified": "2023-11-24T00:00:00+00:00","publisher": {
+                        }],"genre": "posts","wordcount":  1529 ,
+        "url": "https:\/\/dsed.uk\/posts\/cpu_building\/","datePublished": "2023-11-24T00:00:00+00:00","dateModified": "2023-11-27T17:25:24+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -70,9 +70,9 @@
             </a></div>
     </div>
 </header><main class="main">
-                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">A simple CPU: Advent of Code Throwback 2, Object-Orientated Programming</h1><div class="post-meta">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1527 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1529 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -127,6 +127,7 @@
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">=</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1"># triggering a noop instruction should increment the internal clock of the cpu</span>
@@ -163,6 +164,7 @@
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register</span> <span class="o">=</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">signal_strength</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
 </span></span></code></pre></div><p>A class definition always needs an <code>__init__()</code> method. This specifies the pieces of info that need to be assigned when a copy of the template is requested (&lsquo;instantiated&rsquo;).</p>
 <p>We can make the copy by just treating the class as a function and assigned the output to a variable: <code>my_cpu = CPU()</code></p>
 <p>We would then have three variables, <code>my_cpu.clock</code>, <code>my_cpu.register</code>, and <code>my_cpu.signal_strength</code>, all with pre-set values.</p>
@@ -255,7 +257,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-24</span>
+                <span>Updated on 2023-11-27&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/41b8b04182d9d2c03b929421c4db99c558e121bc" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 41b8b04182d9d2c03b929421c4db99c558e121bc: amend missing return in code for cpu post">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>41b8b04</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>

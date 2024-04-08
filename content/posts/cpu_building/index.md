@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming"
 date: 2023-11-24
 draft: false

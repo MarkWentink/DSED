@@ -1,5 +1,5 @@
 ---
-weight: 2
+weight: 3
 title: "Coffee and Cake, a match made in heaven: Intro to Association Rules"
 date: 2023-06-09
 draft: false

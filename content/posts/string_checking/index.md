@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "Rucksack Re-org: Advent of Code Throwback 1, String Parsing"
 date: 2023-11-24
 draft: false

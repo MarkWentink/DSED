@@ -4,9 +4,17 @@
         <link>https://dsed.uk/</link>
         <description>Hypotheses, Hyperparameters, Headaches</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>wentink.mark@gmail.com (Mark Wentink)</managingEditor>
-            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Fri, 24 Nov 2023 00:00:00 &#43;0000</lastBuildDate>
+            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Sat, 06 Apr 2024 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://dsed.uk/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Two sides of the same coin? Visualising crypto-currency price correlations</title>
+    <link>https://dsed.uk/posts/cryptos/</link>
+    <pubDate>Sat, 06 Apr 2024 00:00:00 &#43;0000</pubDate>
+    <author>M Wentink</author>
+    <guid>https://dsed.uk/posts/cryptos/</guid>
+    <description><![CDATA[To what extent can we diversify a crypto portfolio?]]></description>
+</item>
+<item>
     <title>A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming</title>
     <link>https://dsed.uk/posts/cpu_building/</link>
     <pubDate>Fri, 24 Nov 2023 00:00:00 &#43;0000</pubDate>

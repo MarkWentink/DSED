@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1400px;
+                 height: 1200px;
+                 background-color: #eeeeee;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "#000000"}, "id": "BTC", "label": "BTC", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "ETH", "label": "ETH", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "SOL", "label": "SOL", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "STX", "label": "STX", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "BNB", "label": "BNB", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "XRP", "label": "XRP", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "DOT", "label": "DOT", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "LINK", "label": "LINK", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "AVAX", "label": "AVAX", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "DOGE", "label": "DOGE", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "ADA", "label": "ADA", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "BCH", "label": "BCH", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "UNI", "label": "UNI", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "LTC", "label": "LTC", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "FIL", "label": "FIL", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "ATOM", "label": "ATOM", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "NEAR", "label": "NEAR", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "ICP", "label": "ICP", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"font": {"size": 200}, "from": "BTC", "label": 0.9244400234294244, "to": "ETH", "value": 0.9244400234294244, "weight": 0.9244400234294244, "width": 1}, {"font": {"size": 200}, "from": "BTC", "label": 0.8672452727903758, "to": "SOL", "value": 0.8672452727903758, "weight": 0.8672452727903758, "width": 1}, {"font": {"size": 200}, "from": "BTC", "label": 0.9319608686627588, "to": "STX", "value": 0.9319608686627588, "weight": 0.9319608686627588, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.9042047814887028, "to": "BNB", "value": 0.9042047814887028, "weight": 0.9042047814887028, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.9027117320091516, "to": "SOL", "value": 0.9027117320091516, "weight": 0.9027117320091516, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.8331939270866264, "to": "XRP", "value": 0.8331939270866264, "weight": 0.8331939270866264, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.8439481088692274, "to": "DOT", "value": 0.8439481088692274, "weight": 0.8439481088692274, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.8556435265018928, "to": "LINK", "value": 0.8556435265018928, "weight": 0.8556435265018928, "width": 1}, {"font": {"size": 200}, "from": "ETH", "label": 0.8631164787112918, "to": "STX", "value": 0.8631164787112918, "weight": 0.8631164787112918, "width": 1}, {"font": {"size": 200}, "from": "SOL", "label": 0.845780496765225, "to": "BNB", "value": 0.845780496765225, "weight": 0.845780496765225, "width": 1}, {"font": {"size": 200}, "from": "SOL", "label": 0.8602742655280237, "to": "AVAX", "value": 0.8602742655280237, "weight": 0.8602742655280237, "width": 1}, {"font": {"size": 200}, "from": "SOL", "label": 0.8510708367581342, "to": "STX", "value": 0.8510708367581342, "weight": 0.8510708367581342, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8493649539673734, "to": "DOGE", "value": 0.8493649539673734, "weight": 0.8493649539673734, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.886627055221044, "to": "ADA", "value": 0.886627055221044, "weight": 0.886627055221044, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8776686558197268, "to": "DOT", "value": 0.8776686558197268, "weight": 0.8776686558197268, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8944296012897445, "to": "BCH", "value": 0.8944296012897445, "weight": 0.8944296012897445, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.9022378939140683, "to": "LINK", "value": 0.9022378939140683, "weight": 0.9022378939140683, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8701350118941656, "to": "UNI", "value": 0.8701350118941656, "weight": 0.8701350118941656, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8999922715372419, "to": "LTC", "value": 0.8999922715372419, "weight": 0.8999922715372419, "width": 1}, {"font": {"size": 200}, "from": "XRP", "label": 0.8572422192187845, "to": "FIL", "value": 0.8572422192187845, "weight": 0.8572422192187845, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.9123526830711416, "to": "ADA", "value": 0.9123526830711416, "weight": 0.9123526830711416, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.8688462669143778, "to": "LINK", "value": 0.8688462669143778, "weight": 0.8688462669143778, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.8730159701064436, "to": "UNI", "value": 0.8730159701064436, "weight": 0.8730159701064436, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.9024507657732116, "to": "LTC", "value": 0.9024507657732116, "weight": 0.9024507657732116, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.8510397902574246, "to": "FIL", "value": 0.8510397902574246, "weight": 0.8510397902574246, "width": 1}, {"font": {"size": 200}, "from": "DOT", "label": 0.8507577307664771, "to": "ATOM", "value": 0.8507577307664771, "weight": 0.8507577307664771, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.8935466343911528, "to": "DOGE", "value": 0.8935466343911528, "weight": 0.8935466343911528, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.8836836805321625, "to": "ADA", "value": 0.8836836805321625, "weight": 0.8836836805321625, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.9294234563715533, "to": "BCH", "value": 0.9294234563715533, "weight": 0.9294234563715533, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.9161728460543016, "to": "UNI", "value": 0.9161728460543016, "weight": 0.9161728460543016, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.8746553677737136, "to": "LTC", "value": 0.8746553677737136, "weight": 0.8746553677737136, "width": 1}, {"font": {"size": 200}, "from": "LINK", "label": 0.8712729038663708, "to": "FIL", "value": 0.8712729038663708, "weight": 0.8712729038663708, "width": 1}, {"font": {"size": 200}, "from": "AVAX", "label": 0.8916534359039328, "to": "NEAR", "value": 0.8916534359039328, "weight": 0.8916534359039328, "width": 1}, {"font": {"size": 200}, "from": "AVAX", "label": 0.8351277239271895, "to": "ATOM", "value": 0.8351277239271895, "weight": 0.8351277239271895, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.8739926013900678, "to": "ADA", "value": 0.8739926013900678, "weight": 0.8739926013900678, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.9395542752663987, "to": "BCH", "value": 0.9395542752663987, "weight": 0.9395542752663987, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.853179179674339, "to": "ICP", "value": 0.853179179674339, "weight": 0.853179179674339, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.9513100808990551, "to": "UNI", "value": 0.9513100808990551, "weight": 0.9513100808990551, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.9045399369311643, "to": "LTC", "value": 0.9045399369311643, "weight": 0.9045399369311643, "width": 1}, {"font": {"size": 200}, "from": "DOGE", "label": 0.9435073728788191, "to": "FIL", "value": 0.9435073728788191, "weight": 0.9435073728788191, "width": 1}, {"font": {"size": 200}, "from": "ADA", "label": 0.8513496106312382, "to": "BCH", "value": 0.8513496106312382, "weight": 0.8513496106312382, "width": 1}, {"font": {"size": 200}, "from": "ADA", "label": 0.9392263634618637, "to": "UNI", "value": 0.9392263634618637, "weight": 0.9392263634618637, "width": 1}, {"font": {"size": 200}, "from": "ADA", "label": 0.8706948989526474, "to": "LTC", "value": 0.8706948989526474, "weight": 0.8706948989526474, "width": 1}, {"font": {"size": 200}, "from": "ADA", "label": 0.9339312074221792, "to": "FIL", "value": 0.9339312074221792, "weight": 0.9339312074221792, "width": 1}, {"font": {"size": 200}, "from": "BCH", "label": 0.8305492511754583, "to": "ICP", "value": 0.8305492511754583, "weight": 0.8305492511754583, "width": 1}, {"font": {"size": 200}, "from": "BCH", "label": 0.9223209922777111, "to": "UNI", "value": 0.9223209922777111, "weight": 0.9223209922777111, "width": 1}, {"font": {"size": 200}, "from": "BCH", "label": 0.8984200655624418, "to": "LTC", "value": 0.8984200655624418, "weight": 0.8984200655624418, "width": 1}, {"font": {"size": 200}, "from": "BCH", "label": 0.9046113050021657, "to": "FIL", "value": 0.9046113050021657, "weight": 0.9046113050021657, "width": 1}, {"font": {"size": 200}, "from": "UNI", "label": 0.9138188501936864, "to": "LTC", "value": 0.9138188501936864, "weight": 0.9138188501936864, "width": 1}, {"font": {"size": 200}, "from": "UNI", "label": 0.9667547201400966, "to": "FIL", "value": 0.9667547201400966, "weight": 0.9667547201400966, "width": 1}, {"font": {"size": 200}, "from": "LTC", "label": 0.9119073455448952, "to": "FIL", "value": 0.9119073455448952, "weight": 0.9119073455448952, "width": 1}, {"font": {"size": 200}, "from": "FIL", "label": 0.8291194383696557, "to": "ICP", "value": 0.8291194383696557, "weight": 0.8291194383696557, "width": 1}, {"font": {"size": 200}, "from": "NEAR", "label": 0.8370938958447621, "to": "ATOM", "value": 0.8370938958447621, "weight": 0.8370938958447621, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.18,
+            "gravitationalConstant": -2000,
+            "springConstant": 0.03,
+            "springLength": 80
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

@@ -5,7 +5,7 @@ date: 2024-04-06
 draft: false
 author: "M Wentink"
 authorLink: "https://MarkWentink.github.io/DSED"
-summary: "To what extent can we diversify a crypto portfolio?"
+summary: "Investment diversification can be less effective that it seems in a strongly correlated market. By visualising correlations in the crypto-currency market, we evaluate how viable a strategy diversification is for cryptos."
 images: []
 resources:
 - name: featured-image
@@ -47,7 +47,7 @@ Once you make it onto a crypto exchange, there are several hundred tokens availa
 
 How do we know which one to buy, and **does the choice even matter?** That second question is where the stats come in. 
 
-Let's focus on the top 30 cryptocurrencies by market cap. After removing near-identical tokens such as staked Ether (StETH) and wrapped Bitcoin (wBTC), we are left with 25 top tokens. They are presented below sized by market cap and coloured by type of token (blue for transactions, green for smart contracts, etc...)
+Let's focus on the top 30 cryptocurrencies by market cap. Together, they account for about 90% of the crypto market. After removing near-identical tokens such as staked Ether (StETH) and wrapped Bitcoin (wBTC), we are left with 25 top tokens. They are presented below sized by market cap and coloured by type of token (blue for transactions, green for smart contracts, etc...)
 
 {{< image src="./market_caps.png" height="500px" width="1160px" caption="Top 25 crypto-currencies sized by market cap">}}
 
@@ -56,7 +56,7 @@ The first thing to note is that the market is still dominated by BTC, accounting
 
 Working off the last 3 years of daily prices of these tokens, we can start looking for strong correlations, i.e. tokens that systematically move up together, and move down together. 
 
-Let's check correlations between top tokens. When exploring correlations across several features, a popular way to present this as a heatmap, where a red square indicates a strong relationship between a pair of tokens. 
+Let's check correlations between top tokens. When exploring correlations across several features, a popular way to present this as a heatmap, where a red square indicates a strong relationship between a pair of tokens. But when we try to compare many tokens against each other, this becomes quite a mess:
 
 {{< image src="./heatmap.png" height="500px" width="1160px" caption="Correlations between pairs of the top 25 tokens. Deep red is strong correlations ">}}
 
@@ -65,23 +65,46 @@ This is not easy to look at, at all, but a few things do stand out:
 - the whole graph is quite red, indicating that, in general, all cryptos coins are quite strongly correlated to each other
 - there are a few tokens that are relatively immune to correlations, typically the stablecoins (USDT, USDC, DAI)
 
-We can do better than this. Rather than plotting correlations by colour in a grid, let's use a tree diagram:
+At this stage, we already get the sense that, in terms of price fluctuations, we are exposing ourselves to very similar patterns. Take for example the very top-left corner. The boxes for bitcoin-Ether are deep red. These coins have very similar behaviours when it comes to price fluctuations. Splitting your investment 50/50 between those two would hardly reduce your risk at all. 
+
+If we want to properly spread our risk, we need to *identify groups of tokens that behave similarly, and spread our investment across the groups*. Those groups are hard to find in a heatmap, but we can do better. 
+
+# A hierarchical approach to clustering
+
+Rather than plotting correlations by colour in a grid, we can treat correlations as a measure of distance. We can think of strongly correlated coins as 'close together' and weakly correlated coins as 'far away'. Treated like this, coins can form groups of similarity, which we can then visualise clearly. Let's use a tree diagram:
 
 {{< image src="./tree.png" height="500px" width="1160px" caption="Crypto-currencies correlations clusters">}}
 
 In a tree diagram like this, all the tokens are listed at the bottom. The closer to the bottom the branches of currencies join up, the more strongly correlated they are. This allows us to detect groups of currencies that tend to behave similarly. 
 
-For example, the left-most group, in orange, are the stablecoins. These are somewhat correlated to each other, as they are all linked to the US dollar, but they don't join up with the other currencies until the very top of the tree. They are very indepedent from the rest when it comes to price fluctuations. 
+Encouragingly, the natural correlations we see in price fluctuations seem to have some reasonable overlap with the different purposes / value propositions of the coins:
 
-Most of the transaction-focused tokens appear in the green group: ADA, DOT, BCH, XRP, LTC. These are all very strongly correlated to each other, to the point where investing in multiple of these is an illusion of diversification, you might as well just buy one. 
+-  the left-most group, in orange, seem to be the stablecoins. These are somewhat correlated to each other, as they are all linked to the US dollar, but they don't join up with the other currencies until the very top of the tree. They are very independent from the rest when it comes to price fluctuations. 
+
+- Most of the transaction-focused tokens appear in the green group: ADA, DOT, BCH, XRP, LTC. These are all very strongly correlated to each other, to the point where investing in multiple of these is an illusion of diversification, you might as well just buy one. 
 
 Interestingly, DogeCoin, a meme coin with really no value proposition at all, is very strongly linked to the transactional tokens. As transactional tokens make up a significant portion of the market, this might indicate interest in DogeCoin follows general interest in the crypto market. 
 
-{{< image src="./network.png" height="500px" width="1160px" caption="Crypto-currencies correlations as a network">}}
+Let's see one more alternative to heatmaps, visualising the 'coin network' of the crypto market.
+
+# Correlations as a network
+
+Similarly to the tree diagram, we can interpret correlations as links between coins, so that more strongly linked coins can be visualised as closer together. This is an ideal scenario for the use of network graphs:
 
 
+{{< image src="./network.png" height="500px" width="1160px" caption="Crypto-currencies correlations as a network. Three major groups form.">}}
 
-# Bring in context
+Each coin is now a dot (a node), which is linked to its most strongly correlated partners. The thicker the connection, the stronger the correlation. For clarity, the network only shows the strongest correlations, which is why the stablecoins don't show: they're correlations were too weak to be included. 
+
+We can see that the same groups as before form: utility tokens, transaction tokens, and big players.
+
+# Wrap up
+
+Correlation analysis is a very quick way of identifying (linear) relationships and to spot patterns or groups within a dataset. There are many ways of visualising these beyond giant heatmaps that are more intuitive, more readable, and allow us to spot patterns more easily. 
+
+This is only one angle of analsyis. A more quantitative analysis like this should be balanced with research about the actual value propositions of the different coins. What purpose do they serve? Do experts see them as equivalent? Are there logical reasons why some coins are more linked than others. Many coins for example are derivatives from the original Bitcoin and Ether concepts, so we should expect them to have stronger ties to those coins. 
+
+Following this exploration, we are one (small) step closer towards being better informed about how to spread a crypto investment. As we combine different analyses, we gain a better view on what is likely to best reduce some of the inherent risk of a very volatile market. 
 
 -------
 

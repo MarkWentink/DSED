@@ -28,7 +28,7 @@ In this article, I will focus on the question of how different the biggest crypt
 
 I should start by saying I am not a financial analyst nor in any way qualified to give advice. This is not advice, but only my findings from a brief statistical analysis on crypto-currencies. 
 
-Let me start by clarifying what I understand under diversification, i.e. the practice of spreading money across multiple investments. 
+Let me start by clarifying my understanding of the term diversification, i.e. the practice of spreading money across multiple investments. 
 
 First and foremost, the purpose of diversification is to reduce risk and provide more stability to a portfolio overall. If one of the investments goes south, this should only account for part of the money, and hopefully other investments will make up for the loss. 
 

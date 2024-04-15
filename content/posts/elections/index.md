@@ -1,18 +1,18 @@
 ---
 weight: 1
-title: "Data parsing, validation, and wrangling"
+title: "Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes"
 date: 2024-04-11
-draft: True
+draft: False
 author: "M Wentink"
 authorLink: "https://MarkWentink.github.io/DSED"
-summary: "Something about parsing different file types"
+summary: "Inconsistent data recording is a problem that you are guaranteed to come across as a data scientist. Here, we look at an example of writing object-oriented code for repeatable and interpretable data processing."
 images: []
 resources:
 - name: featured-image
   src: elections.jpeg
 - name: featured-image-preview
   src: elections.jpeg
-#categories: ["analysis"]
+#categories: ["analysis", "ETL"]
 
 lightgallery: true
 ---
@@ -42,7 +42,7 @@ This does make for significantly more complex election result analysis. Instead 
 
 # Exploring the files
 
-Once voting results have been made public, we can gather the outcomes of each ward and end up with a neat folder with 354 files, which somehow have to be turned into one comprehensive dataset. 
+Once voting results have been made public, we can gather the outcomes of each ward and end up with a neat folder with 319 files (some wards were excluded from the analysis), which somehow have to be turned into one comprehensive dataset. 
 
 Let's start with a quick look inside a file. Below are the first and last few rows of a .txt file:
 
@@ -56,7 +56,7 @@ Depending on what kind of analysis we (i.e. the stakeholders) are after, there a
 
 In this case, the ask was to retain the full preference order, but to replace the numbers not with the candidate names, but with their party affiliations. 
 
-The file shown was rather tidy. Some of the data formatting and validity issues we came across:
+The file shown was rather tidy. Generally, these are some of the data quality issues we came across:
 - records are stored in 5 different filetypes: `csv`, `xls`, `txt`, `blt`, `xlsx`
 - .csv files were not comma separated, so were recognised as containing only one column
 - Files had rogue whitespace is various places
@@ -64,9 +64,103 @@ The file shown was rather tidy. Some of the data formatting and validity issues 
 - Independent candidates had their party affiliations left empty
 - .txt files included escape characters
 
+# Code Structure
+
+I opted for an object-oriented approach for readability and re-usability. The diagram below illustrates the overall process.
+
+&nbsp;  
+
+
+{{< image src="./ETL_process.png" height="350px" width="1160px" caption="process diagram for ward data cleaning" >}}
+
+&nbsp; 
+The code was split into:
+
+- A **Ward_data superclass**, with functionality for:
+  - reading in the data file (this method needs to vary per filetype)
+  - checking the file loaded correctly
+  - locate and extract the ward name
+  - extract the list of candidates
+  - split up the preference order combinations
+  - replace the candidate id in the preference order by their party name
+  - export as a Pandas DataFrame to concatenate to the dataset
+- **Three sub-classes**, only differing in their read_data method, to handle different file types
+- A **create_object function**, that checks the current file type and creates the appropriate WardData instance
+- a **main function** which
+  - checks the content of a folder
+  - loops through each file 
+  - creates and calls the corresponding class
+  - keeps track of progress, potential duplication, and isolates files that caused issues into a separate folder for further inspection.
+
+This structure means that a lot of the complexity of data cleaning and validation can be split into smaller tasks in the Ward_data methods, while the `main` function stays very readable:
+
+```python
+def main():
+    
+    # set up
+    master_data = pd.DataFrame()
+    processed_wards = []
+    nr_files = len(os.listdir('../data/'))
+    process_count = 0
+    duplicate_count = 0
+    raw_files = glob.glob('../data/*')
+
+    
+    for file_path in raw_files:
+        
+        # create the appropriate class instance for the filetype, 
+        # read in the data, and identify the ward    
+        WD = create_object(file_path)
+        WD.read_data()
+        WD.extract_ward_ID()
+
+        # If the ward has already been processed (i.e. its a duplicate file),
+        # move into a separate folder and skip
+        if WD.ward_ID in processed_wards:
+            print('Ward already processed')
+            shutil.move(file_path, '../duplicated/'+file_path.split('/')[-1])
+            duplicate_count += 1
+            continue
+        else:
+            processed_wards.append(WD.ward_ID)
+
+        # replace candidate ids with party affiliation, create a sorted dataframe
+        WD.extract_candidates()
+        WD.split_votes()
+        WD.replace_parties()
+        WD.combine()
+        WD.sort_by_count()
+        
+        # Append ward to overall dataset
+        master_data = pd.concat([master_data, WD.clean_data])
+      
+        # progress tracker
+        process_count += 1
+        if process_count % 10 == 0:
+            print(f'Processed {process_count} / {nr_files} files')
+    
+    
+    print(f'{process_count} files processed. {duplicate_count} duplicates isolated.')
+    
+    return master_data
+```
+
+It took some tinkering to ensure enough checks were in place to ensure each file could be parsed correctly, but ultimately this resulted in a clean dataset of a quarter million rows: 350 odd wards with around 800 combinations of voting preference each, sorted by corresponding counts. 
+
+-------
+
+The resulting dataset is easily taken forward into aggregations and filtering to answer questions like:
+- Which parties won seats outright and in which wards?
+- Which parties won seats only because first preferences dropped out?
+- Which wards had the tightest races, and within those, where could a small shift in preferences have swung the election outcomes?
+
+More from a behavioural angle, we can ask questions like:
+- Which political parties are most compatible in people's minds (i.e. most interchangable in preference order)
+- Comparing to national elections, we can ask how differently people vote in a preferential voting system vs a first-past-the-post system.
+
 # Wrap up
 
-
+Data cleaning and validation always requires a level of tinkering and trial and error. By compartimentalising code, we can improve its clarity and re-usability, and more easily troubleshoot the process next time data recording changes again.
 
 -------
 

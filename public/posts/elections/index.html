@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes - Data Science Every Day</title><meta name="Description" content="Hypotheses, Hyperparameters, Headaches"><meta property="og:title" content="Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes" />
+<meta property="og:description" content="Inconsistent data recording is a problem that you are guaranteed to come across as a data scientist. Here, we look at an example of writing object-oriented code for repeatable and interpretable data processing." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/elections/" /><meta property="og:image" content="http://localhost:1313/posts/elections/elections.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-04-15T16:38:14+01:00" /><meta property="og:site_name" content="Data Science Every Day" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/posts/elections/elections.jpeg" /><meta name="twitter:title" content="Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes"/>
+<meta name="twitter:description" content="Inconsistent data recording is a problem that you are guaranteed to come across as a data scientist. Here, we look at an example of writing object-oriented code for repeatable and interpretable data processing."/>
+<meta name="application-name" content="Data Science Every Day">
+<meta name="apple-mobile-web-app-title" content="Data Science Every Day"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/elections/" /><link rel="prev" href="http://localhost:1313/posts/cryptos/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/elections\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/localhost:1313\/posts\/elections\/elections.jpeg",
+                            "width":  640 ,
+                            "height":  427 
+                        }],"genre": "posts","wordcount":  1326 ,
+        "url": "http:\/\/localhost:1313\/posts\/elections\/","datePublished": "2024-04-11T00:00:00+00:00","dateModified": "2024-04-15T16:38:14+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "M Wentink"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Data Science Every Day"><span class="header-title-pre"><i class='fa-solid fa-power-off fa-fw'></i></span>Data Science Every Day</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://MarkWentink.github.io/DSED" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>M Wentink</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1326 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/elections/elections.jpeg"
+        data-srcset="/posts/elections/elections.jpeg, /posts/elections/elections.jpeg 1.5x, /posts/elections/elections.jpeg 2x"
+        data-sizes="auto"
+        alt="/posts/elections/elections.jpeg"
+        title="/posts/elections/elections.jpeg" /></div><div class="content" id="content"><p>Ward-level election results are a goldmine for political analysis, but suffer from a problem that haunts data analysts in all industries: inconsistent data recording. Standardisation in terms of how voting outcomes should be recorded is limited, usually resulting in different file types, naming conventions and ordering of information. Before we can start mining for insights, we need to read in all of these files, find the information we&rsquo;re looking for, standardise the format, and collect it all in one place.
+Before we jump into how to make that happen, let&rsquo;s briefly talk about voting.</p>
+<p>Not too fussed about elections? Go straight to the <a href="#exploring-the-files" rel="">file parsing and data processing</a>.</p>
+<hr>
+<p>In Scotland, Members of the Scottish Parliament are voted for at constituency level with a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting" target="_blank" rel="noopener noreffer ">first-past-the-post</a> system. There are 73 constituencies for Scottish parliament elections, and 59 constituencies for UK parliament elections.</p>
+<p>Local councillors, however, are elected in 354 &rsquo;electoral wards&rsquo;. This is the level at which local council elections are typically studied. With vote counts at ward level, we can study how different political parties are represented locally, and how close some of the races were.</p>
+<p>This sounds like it would culminate in a very tidy spreadsheet, where you simply have a table structure <code>| ward | candidate | vote_count |</code>. Things are complicated a bit by the Scottish local voting system of preferential voting.</p>
+<h1 id="single-transferable-voting-preference-ranking">Single transferable voting: preference ranking</h1>
+<p>In a traditional first-past-the-post system, people cast a vote on a single candidate, and the candidate(s) with the most votes wins. A commonly raised challenge with this system is that it discourages people from voting on smaller or less popular political parties. Voting on a candidate that doesn&rsquo;t stand much chance of gaining an actual majority can be seen as throwing away your vote, even though that may well be your preferred candidate.</p>
+<p>Instead, Scotland handles a <a href="https://en.wikipedia.org/wiki/Single_transferable_vote" target="_blank" rel="noopener noreffer ">Single Transferable Voting</a> system. Instead of casting their ballot for one candidate, voters rank a list of candidates by preference. Your vote is initially counted towards your first preference. However, if your first choice does not get enough votes, and gets eliminated, your vote is transfered to your next favourite candidate. This means that voting for a candidate you feel strongly about but may seem unlikely to get enough votes is not a wasted vote. Even if the candidate doesn&rsquo;t make it, your vote still counts towards your second best option.</p>
+<p>This does make for significantly more complex election result analysis. Instead of simply having a list of candidates with corresponding vote counts, we have a large number of possible preference rankings, each offering potential insights not just in which way voters are leaning, but also into what their second or third choice would have been, i.e. where a small nudges such as more intensive campaigning are most likely to influence election outcomes.</p>
+<h1 id="exploring-the-files">Exploring the files</h1>
+<p>Once voting results have been made public, we can gather the outcomes of each ward and end up with a neat folder with 319 files (some wards were excluded from the analysis), which somehow have to be turned into one comprehensive dataset.</p>
+<p>Let&rsquo;s start with a quick look inside a file. Below are the first and last few rows of a .txt file:</p>
+<figure><a class="lightgallery" href="./example_file.png" title="./example_file.png" data-thumbnail="./example_file.png" data-sub-html="<h2>Top and bottom rows of an election record file</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="./example_file.png"
+            data-srcset="./example_file.png, ./example_file.png 1.5x, ./example_file.png 2x"
+            data-sizes="auto"
+            alt="./example_file.png" width="1160px" height="300px" />
+    </a><figcaption class="image-caption">Top and bottom rows of an election record file</figcaption>
+    </figure>
+<p>At first glance, the voting results look like random strings of numbers. A bit of puzzling (and asking someone who knows) later, we&rsquo;ve found out that every record starts with the number of people voting that exact preference order, followed by numbers representing each of the candidates, which are listed at the bottom.</p>
+<p>For example, the second row, <code>17 1 3 6 5 0</code> signifies that 17 people voted that exact combination, which is candidate 1 (Fairlie) as first preference, followed by candidate 3 (Lindsay), 6 (Quinn), and 5 (Quin). The 0 represents an end-of-line token.</p>
+<p>Depending on what kind of analysis we (i.e. the stakeholders) are after, there are many ways to aggregate and simplify these records. Maybe we&rsquo;d choose to simplify voting patterns to only a top 3 so that we can aggregate some of the records.</p>
+<p>In this case, the ask was to retain the full preference order, but to replace the numbers not with the candidate names, but with their party affiliations.</p>
+<p>The file shown was rather tidy. Generally, these are some of the data quality issues we came across:</p>
+<ul>
+<li>records are stored in 5 different filetypes: <code>csv</code>, <code>xls</code>, <code>txt</code>, <code>blt</code>, <code>xlsx</code></li>
+<li>.csv files were not comma separated, so were recognised as containing only one column</li>
+<li>Files had rogue whitespace is various places</li>
+<li>Candidate names may or may not be in quotation marks</li>
+<li>Independent candidates had their party affiliations left empty</li>
+<li>.txt files included escape characters</li>
+</ul>
+<h1 id="code-structure">Code Structure</h1>
+<p>I opted for an object-oriented approach for readability and re-usability. The diagram below illustrates the overall process.</p>
+<p> </p>
+<figure><a class="lightgallery" href="./ETL_process.png" title="./ETL_process.png" data-thumbnail="./ETL_process.png" data-sub-html="<h2>process diagram for ward data cleaning</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="./ETL_process.png"
+            data-srcset="./ETL_process.png, ./ETL_process.png 1.5x, ./ETL_process.png 2x"
+            data-sizes="auto"
+            alt="./ETL_process.png" width="1160px" height="350px" />
+    </a><figcaption class="image-caption">process diagram for ward data cleaning</figcaption>
+    </figure>
+<p> 
+The code was split into:</p>
+<ul>
+<li>A <strong>Ward_data superclass</strong>, with functionality for:
+<ul>
+<li>reading in the data file (this method needs to vary per filetype)</li>
+<li>checking the file loaded correctly</li>
+<li>locate and extract the ward name</li>
+<li>extract the list of candidates</li>
+<li>split up the preference order combinations</li>
+<li>replace the candidate id in the preference order by their party name</li>
+<li>export as a Pandas DataFrame to concatenate to the dataset</li>
+</ul>
+</li>
+<li><strong>Three sub-classes</strong>, only differing in their read_data method, to handle different file types</li>
+<li>A <strong>create_object function</strong>, that checks the current file type and creates the appropriate WardData instance</li>
+<li>a <strong>main function</strong> which
+<ul>
+<li>checks the content of a folder</li>
+<li>loops through each file</li>
+<li>creates and calls the corresponding class</li>
+<li>keeps track of progress, potential duplication, and isolates files that caused issues into a separate folder for further inspection.</li>
+</ul>
+</li>
+</ul>
+<p>This structure means that a lot of the complexity of data cleaning and validation can be split into smaller tasks in the Ward_data methods, while the <code>main</code> function stays very readable:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># set up</span>
+</span></span><span class="line"><span class="cl">    <span class="n">master_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">processed_wards</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nr_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;../data/&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">process_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">duplicate_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">raw_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../data/*&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">raw_files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># create the appropriate class instance for the filetype, </span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># read in the data, and identify the ward    </span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span> <span class="o">=</span> <span class="n">create_object</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">extract_ward_ID</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># If the ward has already been processed (i.e. its a duplicate file),</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># move into a separate folder and skip</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">WD</span><span class="o">.</span><span class="n">ward_ID</span> <span class="ow">in</span> <span class="n">processed_wards</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ward already processed&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;../duplicated/&#39;</span><span class="o">+</span><span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">duplicate_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">processed_wards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">WD</span><span class="o">.</span><span class="n">ward_ID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># replace candidate ids with party affiliation, create a sorted dataframe</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">extract_candidates</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">split_votes</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">replace_parties</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WD</span><span class="o">.</span><span class="n">sort_by_count</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Append ward to overall dataset</span>
+</span></span><span class="line"><span class="cl">        <span class="n">master_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">master_data</span><span class="p">,</span> <span class="n">WD</span><span class="o">.</span><span class="n">clean_data</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">        <span class="c1"># progress tracker</span>
+</span></span><span class="line"><span class="cl">        <span class="n">process_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">process_count</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Processed </span><span class="si">{</span><span class="n">process_count</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="n">nr_files</span><span class="si">}</span><span class="s1"> files&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">process_count</span><span class="si">}</span><span class="s1"> files processed. </span><span class="si">{</span><span class="n">duplicate_count</span><span class="si">}</span><span class="s1"> duplicates isolated.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">master_data</span>
+</span></span></code></pre></div><p>It took some tinkering to ensure enough checks were in place to ensure each file could be parsed correctly, but ultimately this resulted in a clean dataset of a quarter million rows: 350 odd wards with around 800 combinations of voting preference each, sorted by corresponding counts.</p>
+<hr>
+<p>The resulting dataset is easily taken forward into aggregations and filtering to answer questions like:</p>
+<ul>
+<li>Which parties won seats outright and in which wards?</li>
+<li>Which parties won seats only because first preferences dropped out?</li>
+<li>Which wards had the tightest races, and within those, where could a small shift in preferences have swung the election outcomes?</li>
+</ul>
+<p>More from a behavioural angle, we can ask questions like:</p>
+<ul>
+<li>Which political parties are most compatible in people&rsquo;s minds (i.e. most interchangable in preference order)</li>
+<li>Comparing to national elections, we can ask how differently people vote in a preferential voting system vs a first-past-the-post system.</li>
+</ul>
+<h1 id="wrap-up">Wrap up</h1>
+<p>Data cleaning and validation always requires a level of tinkering and trial and error. By compartimentalising code, we can improve its clarity and re-usability, and more easily troubleshoot the process next time data recording changes again.</p>
+<hr>
+<p>Got questions? Spotted any issues in the code? Or do you want to share your own examples of implementations? Drop me a message on <a href="https://www.linkedin.com/in/mark-wentink-793217116/" target="_blank" rel="noopener noreffer ">LinkedIn</a>.</p>
+<hr>
+<p>Photo Credit: Harrison Broadbent, Unsplash</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-15&nbsp;<a class="git-hash" href="https://github.com/MarkWentink/DSED/commit/80d06a72b583f21ab6a13d2f56a130c8af9477cf" target="_blank" title="commit by MarkWentink(wentink.mark@gmail.com) 80d06a72b583f21ab6a13d2f56a130c8af9477cf: finalise elections post">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>80d06a7</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cryptos/" class="prev" rel="prev" title="Two sides of the same coin? Visualising crypto-currency price correlations"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Two sides of the same coin? Visualising crypto-currency price correlations</a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":60},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

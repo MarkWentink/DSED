@@ -2,14 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://dsed.uk/posts/cryptos/</loc><lastmod>2024-04-09T16:49:18&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/cpu_building/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/string_checking/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/apriori/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/dijkstra_demo/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/path_finding/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/</loc><lastmod>2024-04-09T16:49:18&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/posts/</loc><lastmod>2024-04-09T16:49:18&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/about/</loc><lastmod>2023-05-24T14:42:17&#43;01:00</lastmod></url><url>
-            <loc>https://dsed.uk/categories/</loc></url><url>
-            <loc>https://dsed.uk/tags/</loc></url></urlset>
+            <loc>http://localhost:1313/posts/elections/</loc><lastmod>2024-04-15T16:38:14&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/cryptos/</loc><lastmod>2024-04-09T16:49:18&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/cpu_building/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/string_checking/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/apriori/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/dijkstra_demo/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/path_finding/</loc><lastmod>2024-04-08T22:07:38&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/</loc><lastmod>2024-04-15T16:38:14&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/</loc><lastmod>2024-04-15T16:38:14&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/about/</loc><lastmod>2023-05-24T14:42:17&#43;01:00</lastmod></url><url>
+            <loc>http://localhost:1313/categories/</loc></url><url>
+            <loc>http://localhost:1313/tags/</loc></url></urlset>

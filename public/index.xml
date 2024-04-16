@@ -1,58 +1,66 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Data Science Every Day</title>
-        <link>https://dsed.uk/</link>
+        <link>http://localhost:1313/</link>
         <description>Hypotheses, Hyperparameters, Headaches</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>wentink.mark@gmail.com (Mark Wentink)</managingEditor>
-            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Sat, 06 Apr 2024 00:00:00 &#43;0000</lastBuildDate>
-            <atom:link href="https://dsed.uk/index.xml" rel="self" type="application/rss+xml" />
+            <webMaster>wentink.mark@gmail.com (Mark Wentink)</webMaster><lastBuildDate>Thu, 11 Apr 2024 00:00:00 &#43;0000</lastBuildDate>
+            <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Every Vote Counts: Data parsing, validation, and wrangling of local election outcomes</title>
+    <link>http://localhost:1313/posts/elections/</link>
+    <pubDate>Thu, 11 Apr 2024 00:00:00 &#43;0000</pubDate>
+    <author>M Wentink</author>
+    <guid>http://localhost:1313/posts/elections/</guid>
+    <description><![CDATA[Inconsistent data recording is a problem that you are guaranteed to come across as a data scientist. Here, we look at an example of writing object-oriented code for repeatable and interpretable data processing.]]></description>
+</item>
+<item>
     <title>Two sides of the same coin? Visualising crypto-currency price correlations</title>
-    <link>https://dsed.uk/posts/cryptos/</link>
+    <link>http://localhost:1313/posts/cryptos/</link>
     <pubDate>Sat, 06 Apr 2024 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/cryptos/</guid>
+    <guid>http://localhost:1313/posts/cryptos/</guid>
     <description><![CDATA[Investment diversification can be less effective that it seems in a strongly correlated market. By visualising correlations in the crypto-currency market, we evaluate how viable a strategy diversification is for cryptos.]]></description>
 </item>
 <item>
     <title>A simple CPU: Advent of Code Throwback 2, Object-Oriented Programming</title>
-    <link>https://dsed.uk/posts/cpu_building/</link>
+    <link>http://localhost:1313/posts/cpu_building/</link>
     <pubDate>Fri, 24 Nov 2023 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/cpu_building/</guid>
+    <guid>http://localhost:1313/posts/cpu_building/</guid>
     <description><![CDATA[In this Advent of Code challenges, we take an object-orientated approach to programming a very simple CPU.]]></description>
 </item>
 <item>
     <title>Rucksack Re-org: Advent of Code Throwback 1, String Parsing</title>
-    <link>https://dsed.uk/posts/string_checking/</link>
+    <link>http://localhost:1313/posts/string_checking/</link>
     <pubDate>Fri, 24 Nov 2023 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/string_checking/</guid>
+    <guid>http://localhost:1313/posts/string_checking/</guid>
     <description><![CDATA[In this Advent of Code challenges, we introduce some simple string parsing and checking with sets, and prepare some ready-made function that we may be able to re-use in later challenges.]]></description>
 </item>
 <item>
     <title>Coffee and Cake, a match made in heaven: Intro to Association Rules</title>
-    <link>https://dsed.uk/posts/apriori/</link>
+    <link>http://localhost:1313/posts/apriori/</link>
     <pubDate>Fri, 09 Jun 2023 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/apriori/</guid>
+    <guid>http://localhost:1313/posts/apriori/</guid>
     <description><![CDATA[Association rules mining, aka Market Basket Analysis, helps us detect patterns in shopping behaviours, website browsing, and even medicine interaction. To explore this technique, let&rsquo;s set up our own coffeeshop and see whether coffee and cake is in fact the perfect match.]]></description>
 </item>
 <item>
     <title>Climbing Mountains: an implementation of Dijkstra&#39;s algorithm</title>
-    <link>https://dsed.uk/posts/dijkstra_demo/</link>
+    <link>http://localhost:1313/posts/dijkstra_demo/</link>
     <pubDate>Tue, 30 May 2023 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/dijkstra_demo/</guid>
-    <description><![CDATA[<p>In <a href="https://dsed.uk/posts/path_finding/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
+    <guid>http://localhost:1313/posts/dijkstra_demo/</guid>
+    <description><![CDATA[<p>In <a href="http://localhost:1313/posts/path_finding/" rel="">my previous post</a>, I described how <strong>Dijkstra&rsquo;s algorithm</strong> allows us to make our way through mazes, maps, and other graphs, finding <em>the shortest path between a start and end point.</em></p>
 <p>To illustrate what a code implementation might look like, I will use a challenge from my favourite coding event, <strong>Advent of Code</strong>.</p>]]></description>
 </item>
 <item>
     <title>This is the way: Shortest path-finding with Dijkstra&#39;s algorithm</title>
-    <link>https://dsed.uk/posts/path_finding/</link>
+    <link>http://localhost:1313/posts/path_finding/</link>
     <pubDate>Thu, 25 May 2023 00:00:00 &#43;0000</pubDate>
     <author>M Wentink</author>
-    <guid>https://dsed.uk/posts/path_finding/</guid>
+    <guid>http://localhost:1313/posts/path_finding/</guid>
     <description><![CDATA[<p>You wake up from a crazy evening at a Data Science conference in the middle of a cornfield maze. You look to your left, and see corn. To your right, corn. You have no idea how you got here, nor how to get back to civilisation in time for the rest of the conference!</p>]]></description>
 </item>
 </channel>
